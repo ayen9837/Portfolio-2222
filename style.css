@@ -1,0 +1,583 @@
+@font-face {
+    font-family: 'Akira Expanded';
+    /* This must match your file name in the explorer exactly */
+    src: url('fonts/Akira Expanded Demo.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Bebas Neue';
+    /* This must match your file name in the explorer exactly */
+    src: url('fonts/Bebas Neue Demo.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* --- Global Reset and Stability --- */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    /* This locks the screen horizontally to prevent side-scrolling */
+    overflow-x: hidden; 
+    font-family: 'Inter', sans-serif;
+    background-color: #000000;
+    color: #E8D8C4;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #000000;
+    color: #E8D8C4;
+    overflow-x: hidden;
+}
+
+/* --- Navigation --- */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: transparent; /* Changed from #E8D8C4 */
+    z-index: 1000;
+    padding: 1.2rem 0;
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #E8D8C4;
+    letter-spacing: 0.5px;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 3rem;
+}
+
+.nav-links a {
+    color: #E8D8C4;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 400;
+    transition: opacity 0.3s ease;
+}
+
+.nav-links a:hover {
+    opacity: 0.6;
+}
+
+/* --- Hero Section --- */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* Mimics the cinematic lighting effect in your photo */
+    background: radial-gradient(circle at center, #0e161d 0%, #000000 100%);
+    padding: 0 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-content {
+    max-width: 1200px;
+    text-align: center;
+    z-index: 2;
+    margin-bottom: 50px; /* Pushes the button up away from the rising dunes */
+}
+
+.hero-title {
+    font-family: 'Akira Expanded', sans-serif;
+    /* Scales size based on screen width to match the photo's proportions */
+    font-size: clamp(1.4rem, 4.2vw, 2.8rem); 
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 0.6rem;
+    color: #E8D8C4;
+    text-transform: uppercase;
+    /* Wide letter-spacing creates the high-end motion design look */
+    letter-spacing: 5px; 
+    /* Horizontal stretch to match the 'Expanded' style of the font in the image */
+    transform: scaleX(1.1);
+    text-align: center;
+}
+
+.hero-subtitle {
+    /* The subtitle in the image is significantly smaller and more spread out */
+    font-size: clamp(0.55rem, 0.9vw, 0.75rem);
+    font-weight: 700;
+    letter-spacing: 3px;
+    margin-bottom: 4rem;
+    color: #E8D8C4;
+    text-transform: uppercase;
+    max-width: 950px;
+    opacity: 0.95;
+    text-align: center;
+    line-height: 1.6;
+}
+
+
+.cta-button {
+    display: inline-block;
+    background-color: #E8D8C4;
+    color: #000000;
+    /* Wide padding matches the minimalist button style in the photo */
+    padding: 0.9rem 4.5rem; 
+    border-radius: 100px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    box-shadow: none; /* Keeps it flat and modern like the image */
+}
+/* --- Hero Mobile Text --- */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 1.5rem; /* Better scale for mobile */
+        letter-spacing: 1px;
+        line-height: 1.3;
+        transform: scaleX(1); /* Reset stretch for readability */
+    }
+
+    .hero-subtitle {
+        font-size: 0.65rem;
+        letter-spacing: 1px;
+        margin-bottom: 2rem;
+        padding: 0 10px;
+    }
+
+    .cta-button {
+        padding: 0.7rem 2.5rem; /* Smaller button for thumbs */
+        font-size: 0.9rem;
+    }
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(232, 216, 196, 0.5);
+    background-color: #f5e8d8;
+}
+
+/* --- Responsive Wave Divider --- */
+.wave-divider {
+    position: absolute;
+    bottom: -5px; /* Increased overlap to ensure no gaps when scaling */
+    left: 0;
+    width: 100%;
+    line-height: 0;
+    z-index: 1;
+    /* This scales the entire container slightly (approx 3%) */
+    transform: scale(1.275); 
+    transform-origin: bottom;
+}
+
+.wave-divider svg {
+    display: block;
+    width: 100%;
+    /* Increased base height for desktop */
+    height: 290px; 
+    transition: height 0.3s ease;
+}
+
+/* Tablet Adjustment */
+@media (max-width: 1024px) {
+    .wave-divider svg {
+        height: 190px; 
+    }
+}
+
+/* Phone Adjustment */
+@media (max-width: 768px) {
+    .wave-divider svg {
+        height: 130px; 
+    }
+    
+    .hero {
+        /* Extra bottom padding so text stays clear of the larger wave */
+        padding-bottom: 100px; 
+    }
+}
+
+/* Small Phone Adjustment */
+@media (max-width: 480px) {
+    .wave-divider svg {
+        height: 90px;
+    }
+}
+
+/* --- Skills Section --- */
+.skills-section {
+    background: linear-gradient(180deg, #141e22 0%, #2d4a53 35%, #6d929b 70%, #d8b094 100%);
+    padding: 10rem 2rem;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.skills-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    /* Changed from space-between to center to pull both elements together */
+    justify-content: center; 
+    align-items: center;
+    position: relative;
+    /* This gap controls how close the list is to the big 'skills' text */
+    gap: 16rem; 
+}
+
+.skills-bg-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(6rem, 20vw, 18rem); 
+    font-weight: 800;
+    color: #000000;
+    line-height: 0.8;
+    
+    /* REVERTED: Back to your original deep overlap */
+    letter-spacing: -45px; 
+    
+    /* Kept this fixed so your Capital 'S' from HTML shows up */
+    text-transform: none; 
+    
+    position: relative;
+    z-index: 1;
+    text-shadow: -2px -2px 0px rgba(0,0,0,0.3), -5px -5px 0px rgba(0,0,0,0.1);
+}
+
+.skills-list-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    z-index: 2;
+}
+
+.skills-group.upper p {
+    color: #E8D8C4;
+    font-size: clamp(1rem, 1.8vw, 1.3rem);
+    font-weight: 500;
+    margin-bottom: 1rem;
+    text-align: left;
+    opacity: 0.9;
+}
+
+.skills-group.lower p {
+    color: #000000; 
+    font-size: clamp(1rem, 1.8vw, 1.3rem);
+    font-weight: 600; 
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.skills-group.lower {
+    padding-left: 6rem; 
+}
+@media (max-width: 1024px) {
+    .skills-container {
+        flex-direction: column;
+        gap: 2rem; /* Reduced from 16rem */
+        text-align: center;
+    }
+
+    .skills-bg-text {
+        letter-spacing: -5px; /* Reduced from -45px to prevent squashing */
+        font-size: clamp(4rem, 15vw, 8rem);
+        margin-bottom: 1rem;
+    }
+
+    .skills-list-wrapper {
+        gap: 2rem;
+    }
+
+    .skills-group.lower {
+        padding-left: 0; /* Align with upper group on mobile */
+    }
+
+    .skills-group p {
+        text-align: center;
+        font-size: 1.1rem;
+    }
+}
+/* --- Works Section --- */
+.works-section {
+    background: linear-gradient(
+        180deg, 
+        #d8b094 0%, 
+        #000000 100%
+    );
+    padding: 6rem 2rem; 
+    text-align: center;
+}
+
+.works-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;         
+    justify-content: center; 
+    align-items: center;    
+    gap: 5rem;             
+}
+
+.works-title {
+    font-family: 'Akira Expanded', sans-serif;
+    font-size: clamp(1.5rem, 4.5vw, 2.8rem); 
+    font-weight: normal;
+    color: #000000;
+    margin-bottom: 0;
+    text-transform: uppercase;
+    display: inline-block;
+    letter-spacing: 1px;
+}
+
+.works-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #000000;
+    color: #E8D8C4;
+    
+    /* 1. Responsive Padding: Shorter on mobile, wider on desktop */
+    padding: clamp(0.6rem, 2vw, 1rem) clamp(1.5rem, 5vw, 3rem); 
+    
+    border-radius: 100px;
+    text-decoration: none;
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 100; /* Set to 700 as '10' is too thin for most browsers to render */
+    
+    /* 2. Responsive Font Size: Minimum 1.1rem, scales with screen, max 1.7rem */
+    font-size: clamp(1.1rem, 2.5vw, 1.7rem);
+    
+    /* 3. Responsive Letter Spacing */
+    letter-spacing: clamp(1px, 0.2vw, 2.5px); 
+    
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.works-button:hover {
+    transform: scale(1.05); 
+    background-color: #1a1a1a;
+}
+
+/* Responsive Fix for Mobile */
+@media (max-width: 600px) {
+    .works-section {
+        padding: 4rem 1.5rem;
+    }
+    .works-container {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+}
+
+/* --- About Section --- */
+/* --- About Section --- */
+.about-section {
+    background-color: #000000;
+    padding: 10rem 2rem; /* Increased padding for better spacing */
+    text-align: center;
+}
+
+.about-container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.about-title {
+    font-family: 'Inter', sans-serif; /* Simplified for the minimalist look */
+    font-size: 1rem;
+    font-weight: 500;
+    color: #E8D8C4;
+    margin-bottom: 3rem;
+    letter-spacing: 1px;
+}
+
+.about-intro, .about-description {
+    font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+    line-height: 1.6;
+    max-width: 900px;
+    margin: 0 auto 1.2rem;
+    color: #E8D8C4;
+    font-weight: 400;
+}
+
+/* Horizontal Layout for Details */
+.about-details {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem; /* Adjust this to control the distance between the two items */
+    margin-top: 3rem;
+}
+
+.detail-item p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+    color: #E8D8C4;
+}
+
+.detail-item span {
+    margin-right: 12px; 
+    font-size: 1.5rem;   
+    line-height: 1; /* Changed from 0 to 1 to ensure it doesn't collapse */
+    color: #E8D8C4; /* Force the color to match your text */
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Responsive Fix for Mobile */
+@media (max-width: 600px) {
+    .about-section {
+        padding: 5rem 1.5rem; /* Less extreme padding on mobile */
+    }
+
+    .about-details {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+/* --- Footer --- */
+.footer {
+    background: linear-gradient(180deg, #000000 0%, #4a7c9c 100%);
+    padding: 4rem 2rem;
+}
+
+.footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    text-align: center;
+}
+
+/* --- Reveal Animations --- */
+.reveal {
+    opacity: 0;
+    filter: blur(10px); 
+    transition: 
+        opacity 1.5s ease, 
+        transform 1.2s cubic-bezier(0.2, 1, 0.3, 1), 
+        filter 1.5s ease;
+    will-change: transform, opacity;
+}
+
+.reveal-left { 
+    transform: translateX(-80px); 
+}
+
+.reveal-right { 
+    transform: translateX(80px); 
+}
+
+.reveal.active {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0);
+}
+
+.skills-group.upper.active {
+    transition-delay: 0.2s;
+}
+
+.skills-group.lower.active {
+    transition-delay: 0.4s;
+}
+
+
+/* --- Hamburger Menu Styles --- */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    background: none;
+    border: none;
+    gap: 6px;
+    z-index: 1001;
+}
+
+.bar {
+    width: 25px;
+    height: 2px;
+    background-color: #E8D8C4;
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: flex;
+    }
+
+    .nav-links {
+        position: fixed;
+        right: -100%; /* Hidden off-screen */
+        top: 0;
+        flex-direction: column;
+        background-color: rgba(0, 0, 0, 0.95);
+        width: 100%;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+        transition: 0.4s;
+        gap: 2rem;
+    }
+
+    .nav-links.active {
+        right: 0; /* Slide in */
+    }
+
+    /* Animate Hamburger to X */
+    .menu-toggle.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    .menu-toggle.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+    .menu-toggle.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+}
+/* --- Global Nav/Container Fix --- */
+@media (max-width: 480px) {
+    /* Existing code you have... */
+    .nav-container {
+        padding: 0 1.2rem;
+    }
+
+    /* Add this to stack links if they get too crowded */
+    .nav-links {
+        gap: 0.8rem;
+    }
+    
+    .hero-content {
+        /* Gives more room so the navbar doesn't hit the title */
+        margin-top: 60px; 
+    }
+}
