@@ -40,13 +40,20 @@ body {
 }
 
 /* --- Navigation --- */
+/* --- Navigation --- */
 .navbar {
     position: fixed;
     top: 0;
     width: 100%;
-    background-color: transparent; /* Changed from #E8D8C4 */
+    /* ADDED: Background color and glass effect */
+    background-color: rgba(0, 0, 0, 0.85); /* Dark background with 85% opacity */
+    backdrop-filter: blur(10px);           /* Frosted glass effect */
+    -webkit-backdrop-filter: blur(10px);    /* Support for Safari */
+    border-bottom: 1px solid rgba(232, 216, 196, 0.1); /* Subtle divider line */
+    
     z-index: 1000;
     padding: 1.2rem 0;
+    transition: background-color 0.3s ease; /* Smooth transition */
 }
 
 .nav-container {
@@ -83,6 +90,7 @@ body {
 .nav-links a:hover {
     opacity: 0.6;
 }
+
 
 /* --- Hero Section --- */
 .hero {
@@ -321,66 +329,127 @@ body {
 /* --- Works Section --- */
 .works-section {
     background: linear-gradient(180deg, #d8b094 0%, #000000 100%);
-    padding: 8rem 2rem;
-    overflow: hidden; /* Clips the sliding text */
-}
-.works-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;         
-    justify-content: center; 
-    align-items: center;    
-    gap: 5rem;             
+    padding: 8rem 0;
+    overflow: hidden;
 }
 
 .works-title {
     font-family: 'Akira Expanded', sans-serif;
-    font-size: clamp(3rem, 10vw, 6rem); /* Matches the reference's large scale */
+    font-size: clamp(3rem, 10vw, 6rem);
     font-weight: 900;
     color: #1a2332;
-    margin-bottom: 3rem;
-    transition: transform 1s ease;
+    text-align: center;
+    margin-bottom: 5rem;
 }
 
-.works-button {
-    display: inline-flex;
+.works-slider-container {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.works-row {
+    display: flex;
     align-items: center;
-    justify-content: center;
-    background-color: #000000;
-    color: #E8D8C4;
-    
-    /* 1. Responsive Padding: Shorter on mobile, wider on desktop */
-    padding: clamp(0.6rem, 2vw, 1rem) clamp(1.5rem, 5vw, 3rem); 
-    
-    border-radius: 100px;
-    text-decoration: none;
-    font-family: 'Bebas Neue', sans-serif;
-    font-weight: 100; /* Set to 700 as '10' is too thin for most browsers to render */
-    
-    /* 2. Responsive Font Size: Minimum 1.1rem, scales with screen, max 1.7rem */
-    font-size: clamp(1.1rem, 2.5vw, 1.7rem);
-    
-    /* 3. Responsive Letter Spacing */
-    letter-spacing: clamp(1px, 0.2vw, 2.5px); 
-    
+    /* Spacing between the label and the slider */
+    gap: 4rem; 
+    padding: 0 4rem;
+}
+
+.category-label {
+    flex: 0 0 220px;
+    font-family: 'Akira Expanded', sans-serif;
+    font-size: 1rem;
+    text-align: left;
+    color: #1a2332;
+    line-height: 1.4;
     text-transform: uppercase;
-    transition: all 0.3s ease;
-    white-space: nowrap;
+    letter-spacing: 1px;
 }
 
-.works-button:hover {
-    transform: scale(1.05); 
-    background-color: #1a1a1a;
+/* Slider Track & Logic */
+.slider-track {
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    position: relative;
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
 
-/* Responsive Fix for Mobile */
-@media (max-width: 600px) {
-    .works-section {
-        padding: 4rem 1.5rem;
+.slider-content {
+    display: flex;
+    gap: 1.5rem; /* The gap between your boxes */
+    width: max-content;
+    /* Adjust '15s' to make it faster or slower */
+    animation: infinite-scroll 20s linear infinite; 
+}
+
+/* Ensure Row 2 and Row 3 have unique animations if desired */
+.works-row:nth-child(2) .slider-content {
+    animation-direction: reverse;
+    animation-duration: 25s;
+}
+
+.works-row:nth-child(3) .slider-content {
+    animation-duration: 30s; /* Slower than row 1 for visual depth */
+}
+
+/* Ensure videos don't have margins that add to the gap */
+.project-box {
+    flex-shrink: 0;
+    width: 320px;
+    height: 200px;
+    margin: 0; 
+    border-radius: 25px;
+    overflow: hidden;
+    background-color: #3d342c;
+}
+.project-box video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none; /* Prevents clicks from pausing the video */
+}
+
+.project-box:hover {
+    transform: scale(1.05);
+    z-index: 10;
+}
+
+/* THE FIX: Re-adding the missing @keyframes to your file */
+@keyframes infinite-scroll {
+    0% {
+        transform: translateX(0);
     }
-    .works-container {
+    100% {
+        /* Crucial: We move exactly -50% because your HTML contains 
+           two identical sets of boxes. This makes the loop seamless.
+        */
+        transform: translateX(calc(-50% - 0.75rem)); 
+    }
+}
+
+/* Pause when user hovers */
+.slider-track:hover .slider-content {
+    animation-play-state: paused;
+}
+
+/* Mobile Responsive Fixes */
+@media (max-width: 768px) {
+    .works-row {
         flex-direction: column;
-        gap: 1.5rem;
+        align-items: flex-start;
+        padding: 0 1.5rem;
+        gap: 1rem;
+    }
+    .category-label {
+        flex: none;
+        font-size: 0.9rem;
+    }
+    .project-box {
+        width: 260px;
+        height: 160px;
     }
 }
 
@@ -526,10 +595,11 @@ body {
 
     .nav-links {
         position: fixed;
-        right: -100%; /* Hidden off-screen */
+        right: -100%; 
         top: 0;
         flex-direction: column;
-        background-color: rgba(0, 0, 0, 0.95);
+        /* UPDATED: Solid background for mobile overlay */
+        background-color: #000000; 
         width: 100%;
         height: 100vh;
         justify-content: center;
@@ -537,7 +607,7 @@ body {
         transition: 0.4s;
         gap: 2rem;
     }
-
+    
     .nav-links.active {
         right: 0; /* Slide in */
     }
