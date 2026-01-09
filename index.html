@@ -37,6 +37,13 @@
 </head>
 
 <body>
+<div class="video-popup-overlay" id="videoPopup">
+    <div class="popup-video-container">
+        <video id="popupVideo" loop muted playsinline></video>
+    </div>
+</div>
+
+    
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">Warlyn Bagongon</div>
@@ -123,7 +130,8 @@
 
     <div class="works-row">
         <div class="category-label">Motion <br> Graphics</div>
-        <div class="slider-track reverse"> <div class="slider-content">
+        <div class="slider-track reverse"> 
+            <div class="slider-content">
                 <div class="project-box"><video autoplay muted loop playsinline src="videos/dimentional loop.mp4"></video></div>
                 <div class="project-box"><video autoplay muted loop playsinline src="videos/video2.mp4"></video></div>
                 <div class="project-box"><video autoplay muted loop playsinline src="videos/video3.mp4"></video></div>
@@ -320,14 +328,43 @@ document.querySelectorAll('.slider-track').forEach(track => {
     animationFrame = requestAnimationFrame(step);
 
     // Mouse & Touch events remain the same...
+    const popup = document.getElementById('videoPopup');
+const pVideo = document.getElementById('popupVideo');
+let pressTimer;
+
     const startDragging = (e) => {
         isDown = true;
         startX = (e.pageX || e.touches[0].pageX) - x;
+
+        // LONG PRESS PREVIEW LOGIC
+        if (e.type === 'touchstart') {
+            // Find the video source of the box being touched
+            const box = e.target.closest('.project-box');
+            if (box) {
+                const videoSrc = box.querySelector('video').src;
+                pressTimer = window.setTimeout(() => {
+                    if (isDown) { 
+                        pVideo.src = videoSrc;
+                        popup.classList.add('active');
+                        pVideo.play();
+                        isDown = false; // Stop slider movement while previewing
+                    }
+                }, 500); // Trigger after 0.5 seconds of holding
+            }
+        }
     };
 
     const stopDragging = () => {
         isDown = false;
+        clearTimeout(pressTimer); // Cancel preview if they let go early
+        popup.classList.remove('active');
+        pVideo.pause();
     };
+
+    // ... keep your existing move() and event listeners ...
+    
+    // Add this click listener to the popup itself to close it on tap
+    popup.addEventListener('touchstart', stopDragging);
 
     const move = (e) => {
         if (!isDown) return;
@@ -352,5 +389,6 @@ document.querySelectorAll('.slider-track').forEach(track => {
 });
 </script>
 </body>
+
 
 </html>
