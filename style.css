@@ -373,16 +373,24 @@ body {
     overflow: hidden;
     display: flex;
     position: relative;
+    cursor: grab;
+    /* This prevents the page from bouncing while swiping the slider */
+    touch-action: pan-y; 
     mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+.slider-track:active {
+    cursor: grabbing;
 }
 
 .slider-content {
     display: flex;
-    gap: 1.5rem; /* The gap between your boxes */
+    gap: 1.5rem;
     width: max-content;
-    /* Adjust '15s' to make it faster or slower */
-    animation: infinite-scroll 20s linear infinite; 
+    will-change: transform;
+    /* We will handle the movement via JavaScript for better mobile support */
+}
+.slider-content {
+    animation: infinite-scroll 20s linear infinite;
 }
 
 /* Ensure Row 2 and Row 3 have unique animations if desired */
@@ -409,7 +417,7 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    pointer-events: none; /* Prevents clicks from pausing the video */
+    pointer-events: none; /* This allows the swipe to register on the box itself */
 }
 
 .project-box:hover {

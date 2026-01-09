@@ -100,13 +100,20 @@
         <div class="category-label">Kinetic <br> Typography</div>
         <div class="slider-track">
             <div class="slider-content">
-                <div class="project-box"><video autoplay muted loop playsinline src="videos/spin animation.mp4"></video></div>
-                <div class="project-box"><video autoplay muted loop playsinline src="videos/mesh warp txt.mp4"></video></div>
-                <div class="project-box"><video autoplay muted loop playsinline src="videos/glitch text with gradient bg.mp4"></video></div>
-                <div class="project-box"><video autoplay muted loop playsinline src="videos/stretch kinetic typography.mp4"></video></div>
-                <div class="project-box"><video autoplay muted loop playsinline src="videos/heatmap.mp4"></video></div>
-                <div class="project-box"><video autoplay muted loop playsinline src="videos/texture.mp4"></video></div>
-            </div>
+    <div class="project-box"><video autoplay muted loop playsinline src="videos/spin animation.mp4"></video></div>
+    <div class="project-box"><video autoplay muted loop playsinline src="videos/mesh warp txt.mp4"></video></div>
+    <div class="project-box"><video autoplay muted loop playsinline src="videos/glitch text with gradient bg.mp4"></video></div>
+    <div class="project-box"><video autoplay muted loop playsinline src="videos/stretch kinetic typography.mp4"></video></div>
+    <div class="project-box"><video autoplay muted loop playsinline src="videos/heatmap.mp4"></video></div>
+    <div class="project-box"><video autoplay muted loop playsinline src="videos/texture.mp4"></video></div>
+
+    <div class="project-box"><video autoplay muted loop playsinline src="videos/spin animation.mp4"></video></div>
+    <div class="project-box"><video autoplay muted loop playsinline src="videos/mesh warp txt.mp4"></video></div>
+    <div class="project-box"><video autoplay muted loop playsinline src="videos/glitch text with gradient bg.mp4"></video></div>
+    <div class="project-box"><video autoplay muted loop playsinline src="videos/stretch kinetic typography.mp4"></video></div>
+    <div class="project-box"><video autoplay muted loop playsinline src="videos/heatmap.mp4"></video></div>
+    <div class="project-box"><video autoplay muted loop playsinline src="videos/texture.mp4"></video></div>
+</div>
         </div>
     </div>
 
@@ -267,5 +274,70 @@
             navLinks.classList.remove('active');
         }));
     </script>
+    <script>
+document.querySelectorAll('.slider-track').forEach(track => {
+    const content = track.querySelector('.slider-content');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+    let x = 0; // Current scroll position
+    let speed = 1; // Adjust speed (higher = faster)
+    let animationFrame;
+
+    // Automatic Looping Function
+    const step = () => {
+        if (!isDown) {
+            x -= speed;
+            // If we've scrolled past half (the first set of items), reset to 0
+            if (Math.abs(x) >= content.offsetWidth / 2) {
+                x = 0;
+            }
+            content.style.transform = `translateX(${x}px)`;
+        }
+        animationFrame = requestAnimationFrame(step);
+    };
+
+    // Start Auto-slide
+    step();
+
+    // Touch & Mouse Events for Swiping
+    const startDragging = (e) => {
+        isDown = true;
+        startX = (e.pageX || e.touches[0].pageX) - x;
+        cancelAnimationFrame(animationFrame);
+    };
+
+    const stopDragging = () => {
+        isDown = false;
+        step(); // Resume auto-slide
+    };
+
+    const move = (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const currentX = (e.pageX || e.touches[0].pageX);
+        x = currentX - startX;
+        
+        // Infinite Wrap-around while dragging
+        const halfWidth = content.offsetWidth / 2;
+        if (x > 0) x = -halfWidth;
+        if (x < -halfWidth) x = 0;
+        
+        content.style.transform = `translateX(${x}px)`;
+    };
+
+    // Mouse Listeners
+    track.addEventListener('mousedown', startDragging);
+    track.addEventListener('mouseleave', stopDragging);
+    track.addEventListener('mouseup', stopDragging);
+    track.addEventListener('mousemove', move);
+
+    // Touch Listeners (Mobile)
+    track.addEventListener('touchstart', startDragging);
+    track.addEventListener('touchend', stopDragging);
+    track.addEventListener('touchmove', move);
+});
+</script>
 </body>
+
 </html>
