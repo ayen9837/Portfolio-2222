@@ -119,8 +119,7 @@
 
     <div class="works-row">
         <div class="category-label">Motion <br> Graphics</div>
-        <div class="slider-track">
-            <div class="slider-content">
+        <div class="slider-track reverse"> <div class="slider-content">
                 <div class="project-box"><video autoplay muted loop playsinline src="videos/3d spin animation-.mp4"></video></div>
                 <div class="project-box"><video autoplay muted loop playsinline src="videos/video2.mp4"></video></div>
                 <div class="project-box"><video autoplay muted loop playsinline src="videos/video3.mp4"></video></div>
@@ -277,6 +276,7 @@
    <script>
 document.querySelectorAll('.slider-track').forEach(track => {
     const content = track.querySelector('.slider-content');
+    const isReverse = track.classList.contains('reverse'); // Check for the class
     let isDown = false;
     let startX;
     let x = 0; 
@@ -285,8 +285,6 @@ document.querySelectorAll('.slider-track').forEach(track => {
     let animationFrame;
 
     const step = (timestamp) => {
-        // FIX: If we just stopped dragging, reset lastTime to the current timestamp
-        // to prevent the "speed burst" catch-up effect.
         if (!lastTime || isDown) {
             lastTime = timestamp;
             animationFrame = requestAnimationFrame(step);
@@ -296,9 +294,17 @@ document.querySelectorAll('.slider-track').forEach(track => {
         const deltaTime = (timestamp - lastTime) / 1000;
         lastTime = timestamp;
 
-        x -= speed * deltaTime;
+        // DIRECTION LOGIC:
+        // Normal rows subtract (move left), reverse rows add (move right)
+        if (isReverse) {
+            x += speed * deltaTime;
+        } else {
+            x -= speed * deltaTime;
+        }
         
         const halfWidth = content.offsetWidth / 2;
+        
+        // Wrap-around logic for both directions
         if (Math.abs(x) >= halfWidth) {
             x = 0;
         }
@@ -309,6 +315,7 @@ document.querySelectorAll('.slider-track').forEach(track => {
 
     animationFrame = requestAnimationFrame(step);
 
+    // Mouse & Touch events remain the same...
     const startDragging = (e) => {
         isDown = true;
         startX = (e.pageX || e.touches[0].pageX) - x;
@@ -316,7 +323,6 @@ document.querySelectorAll('.slider-track').forEach(track => {
 
     const stopDragging = () => {
         isDown = false;
-        // lastTime is reset inside the step function now
     };
 
     const move = (e) => {
@@ -325,6 +331,7 @@ document.querySelectorAll('.slider-track').forEach(track => {
         x = currentX - startX;
         
         const halfWidth = content.offsetWidth / 2;
+        // Wrap-around check during manual swipe
         if (x > 0) x = -halfWidth;
         if (x < -halfWidth) x = 0;
         
@@ -335,7 +342,6 @@ document.querySelectorAll('.slider-track').forEach(track => {
     track.addEventListener('mouseleave', stopDragging);
     track.addEventListener('mouseup', stopDragging);
     track.addEventListener('mousemove', move);
-
     track.addEventListener('touchstart', startDragging);
     track.addEventListener('touchend', stopDragging);
     track.addEventListener('touchmove', move);
