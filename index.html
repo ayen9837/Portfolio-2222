@@ -38,8 +38,9 @@
 
 <body>
 <div class="video-popup-overlay" id="videoPopup">
-    <div class="popup-video-container">
-        <video id="popupVideo" loop muted playsinline></video>
+        <div class="popup-video-container">
+            <video id="popupVideo" loop muted playsinline></video>
+        </div>
     </div>
 </div>
 
@@ -288,104 +289,81 @@
    <script>
 document.querySelectorAll('.slider-track').forEach(track => {
     const content = track.querySelector('.slider-content');
-    const isReverse = track.classList.contains('reverse'); // Check for the class
+    const isReverse = track.classList.contains('reverse');
+    const popup = document.getElementById('videoPopup');
+    const pVideo = document.getElementById('popupVideo');
+    
     let isDown = false;
     let startX;
-    let x = 0; 
+    let x = 0;
     let speed = 50; 
-    let lastTime = 0;
     let animationFrame;
+    let lastTime = 0;
+
+    // --- NEW: One-Click Pop-up Logic ---
+    track.querySelectorAll('.project-box').forEach(box => {
+        box.addEventListener('click', () => {
+            const videoSrc = box.querySelector('video').src;
+            pVideo.src = videoSrc;
+            popup.classList.add('active');
+            pVideo.play();
+        });
+    });
+
+    // Close popup when clicking the overlay
+    popup.addEventListener('click', () => {
+        popup.classList.remove('active');
+        pVideo.pause();
+    });
 
     const step = (timestamp) => {
-        if (!lastTime || isDown) {
-            lastTime = timestamp;
-            animationFrame = requestAnimationFrame(step);
-            return;
-        }
-        
+        if (!lastTime) lastTime = timestamp;
         const deltaTime = (timestamp - lastTime) / 1000;
         lastTime = timestamp;
 
-        // DIRECTION LOGIC:
-        // Normal rows subtract (move left), reverse rows add (move right)
-        if (isReverse) {
-            x += speed * deltaTime;
-        } else {
-            x -= speed * deltaTime;
+        if (!isDown) {
+            if (isReverse) {
+                x += speed * deltaTime;
+            } else {
+                x -= speed * deltaTime;
+            }
+            const halfWidth = content.offsetWidth / 2;
+            if (Math.abs(x) >= halfWidth) x = 0;
+            content.style.transform = `translateX(${x}px)`;
         }
-        
-        const halfWidth = content.offsetWidth / 2;
-        
-        // Wrap-around logic for both directions
-        if (Math.abs(x) >= halfWidth) {
-            x = 0;
-        }
-        
-        content.style.transform = `translateX(${x}px)`;
         animationFrame = requestAnimationFrame(step);
     };
 
     animationFrame = requestAnimationFrame(step);
 
-    // Mouse & Touch events remain the same...
-    const popup = document.getElementById('videoPopup');
-const pVideo = document.getElementById('popupVideo');
-let pressTimer;
-
+    // Simplified Dragging (Removed the Long Press Timer)
     const startDragging = (e) => {
         isDown = true;
         startX = (e.pageX || e.touches[0].pageX) - x;
-
-        // LONG PRESS PREVIEW LOGIC
-        if (e.type === 'touchstart') {
-            // Find the video source of the box being touched
-            const box = e.target.closest('.project-box');
-            if (box) {
-                const videoSrc = box.querySelector('video').src;
-                pressTimer = window.setTimeout(() => {
-                    if (isDown) { 
-                        pVideo.src = videoSrc;
-                        popup.classList.add('active');
-                        pVideo.play();
-                        isDown = false; // Stop slider movement while previewing
-                    }
-                }, 500); // Trigger after 0.5 seconds of holding
-            }
-        }
     };
 
     const stopDragging = () => {
         isDown = false;
-        clearTimeout(pressTimer); // Cancel preview if they let go early
-        popup.classList.remove('active');
-        pVideo.pause();
     };
-
-    // ... keep your existing move() and event listeners ...
-    
-    // Add this click listener to the popup itself to close it on tap
-    popup.addEventListener('touchstart', stopDragging);
 
     const move = (e) => {
         if (!isDown) return;
         const currentX = (e.pageX || e.touches[0].pageX);
         x = currentX - startX;
-        
         const halfWidth = content.offsetWidth / 2;
-        // Wrap-around check during manual swipe
         if (x > 0) x = -halfWidth;
         if (x < -halfWidth) x = 0;
-        
         content.style.transform = `translateX(${x}px)`;
     };
 
     track.addEventListener('mousedown', startDragging);
     track.addEventListener('mouseleave', stopDragging);
-    track.addEventListener('mouseup', stopDragging);
+    window.addEventListener('mouseup', stopDragging);
     track.addEventListener('mousemove', move);
-    track.addEventListener('touchstart', startDragging);
+
+    track.addEventListener('touchstart', startDragging, {passive: true});
     track.addEventListener('touchend', stopDragging);
-    track.addEventListener('touchmove', move);
+    track.addEventListener('touchmove', move, {passive: true});
 });
 </script>
 </body>
