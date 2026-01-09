@@ -389,9 +389,7 @@ body {
     will-change: transform;
     /* We will handle the movement via JavaScript for better mobile support */
 }
-.slider-content {
-    animation: infinite-scroll 20s linear infinite;
-}
+
 
 /* Ensure Row 2 and Row 3 have unique animations if desired */
 .works-row:nth-child(2) .slider-content {
