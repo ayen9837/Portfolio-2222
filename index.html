@@ -274,51 +274,56 @@
             navLinks.classList.remove('active');
         }));
     </script>
-    <script>
+   <script>
 document.querySelectorAll('.slider-track').forEach(track => {
     const content = track.querySelector('.slider-content');
     let isDown = false;
     let startX;
-    let scrollLeft;
-    let x = 0; // Current scroll position
-    let speed = 1; // Adjust speed (higher = faster)
+    let x = 0; 
+    let speed = 50; 
+    let lastTime = 0;
     let animationFrame;
 
-    // Automatic Looping Function
-    const step = () => {
-        if (!isDown) {
-            x -= speed;
-            // If we've scrolled past half (the first set of items), reset to 0
-            if (Math.abs(x) >= content.offsetWidth / 2) {
-                x = 0;
-            }
-            content.style.transform = `translateX(${x}px)`;
+    const step = (timestamp) => {
+        // FIX: If we just stopped dragging, reset lastTime to the current timestamp
+        // to prevent the "speed burst" catch-up effect.
+        if (!lastTime || isDown) {
+            lastTime = timestamp;
+            animationFrame = requestAnimationFrame(step);
+            return;
         }
+        
+        const deltaTime = (timestamp - lastTime) / 1000;
+        lastTime = timestamp;
+
+        x -= speed * deltaTime;
+        
+        const halfWidth = content.offsetWidth / 2;
+        if (Math.abs(x) >= halfWidth) {
+            x = 0;
+        }
+        
+        content.style.transform = `translateX(${x}px)`;
         animationFrame = requestAnimationFrame(step);
     };
 
-    // Start Auto-slide
-    step();
+    animationFrame = requestAnimationFrame(step);
 
-    // Touch & Mouse Events for Swiping
     const startDragging = (e) => {
         isDown = true;
         startX = (e.pageX || e.touches[0].pageX) - x;
-        cancelAnimationFrame(animationFrame);
     };
 
     const stopDragging = () => {
         isDown = false;
-        step(); // Resume auto-slide
+        // lastTime is reset inside the step function now
     };
 
     const move = (e) => {
         if (!isDown) return;
-        e.preventDefault();
         const currentX = (e.pageX || e.touches[0].pageX);
         x = currentX - startX;
         
-        // Infinite Wrap-around while dragging
         const halfWidth = content.offsetWidth / 2;
         if (x > 0) x = -halfWidth;
         if (x < -halfWidth) x = 0;
@@ -326,13 +331,11 @@ document.querySelectorAll('.slider-track').forEach(track => {
         content.style.transform = `translateX(${x}px)`;
     };
 
-    // Mouse Listeners
     track.addEventListener('mousedown', startDragging);
     track.addEventListener('mouseleave', stopDragging);
     track.addEventListener('mouseup', stopDragging);
     track.addEventListener('mousemove', move);
 
-    // Touch Listeners (Mobile)
     track.addEventListener('touchstart', startDragging);
     track.addEventListener('touchend', stopDragging);
     track.addEventListener('touchmove', move);
