@@ -332,19 +332,33 @@ document.querySelectorAll('.slider-track').forEach(track => {
 
     const step = (timestamp) => {
         if (!lastTime) lastTime = timestamp;
+        
+        // Pause animation if user is clicking/holding for the pop-up
+        if (popup.classList.contains('active')) {
+            lastTime = timestamp;
+            animationFrame = requestAnimationFrame(step);
+            return;
+        }
+        
         const deltaTime = (timestamp - lastTime) / 1000;
         lastTime = timestamp;
 
         if (!isDown) {
+            const halfWidth = content.offsetWidth / 2;
+
             if (isReverse) {
                 x += speed * deltaTime;
+                // If moving Right: when it hits 0, jump back to -halfWidth
+                if (x >= 0) x = -halfWidth;
             } else {
                 x -= speed * deltaTime;
+                // If moving Left: when it hits -halfWidth, jump back to 0
+                if (Math.abs(x) >= halfWidth) x = 0;
             }
-            const halfWidth = content.offsetWidth / 2;
-            if (Math.abs(x) >= halfWidth) x = 0;
+            
             content.style.transform = `translateX(${x}px)`;
         }
+        
         animationFrame = requestAnimationFrame(step);
     };
 
@@ -364,9 +378,13 @@ document.querySelectorAll('.slider-track').forEach(track => {
         if (!isDown) return;
         const currentX = (e.pageX || e.touches[0].pageX);
         x = currentX - startX;
+        
         const halfWidth = content.offsetWidth / 2;
+        
+        // Prevents the slider from being dragged too far out of bounds
         if (x > 0) x = -halfWidth;
         if (x < -halfWidth) x = 0;
+        
         content.style.transform = `translateX(${x}px)`;
     };
 
