@@ -101,9 +101,44 @@ body {
     align-items: center;
     /* Mimics the cinematic lighting effect in your photo */
     background: radial-gradient(circle at center, #0e161d 0%, #000000 100%);
-    padding: 0 2rem;
+    padding: 0 12%;
     position: relative;
     overflow: hidden;
+}
+.hero-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px; /* Limits how wide the content spreads */
+    margin: 0 auto;
+    padding: 0 5%;
+    z-index: 2; /* Keeps text above the spark background */
+}
+.hero-text-side {
+    flex: 1;
+    text-align: left; /* Forces all children (h1, p, a) to the left */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Corrects alignment for the button */
+}
+.hero-image-side {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end; /* Pushes the circle to the far right */
+}
+.profile-circle {
+    width: 380px; /* Adjust based on your photo's resolution */
+    height: 380px;
+    border-radius: 50%; /* This makes it round */
+    overflow: hidden;
+    border: 3px solid #E8D8C4; /* Matching your beige theme */
+    box-shadow: 0 0 40px rgba(232, 216, 196, 0.15);
+}
+.profile-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Prevents your face from looking stretched */
 }
 
 .hero-content {
@@ -115,22 +150,25 @@ body {
 
 .hero-title {
     font-family: 'Akira Expanded', sans-serif;
-    /* Scales size based on screen width to match the photo's proportions */
     font-size: clamp(1.4rem, 4.2vw, 2.8rem); 
-    font-weight: 800;
+    font-weight: 120;
     line-height: 1.1;
-    margin-bottom: 0.6rem;
+    margin: 0 0 1.5rem 0;
     color: #E8D8C4;
     text-transform: uppercase;
-    /* Wide letter-spacing creates the high-end motion design look */
     letter-spacing: 5px; 
-    /* Horizontal stretch to match the 'Expanded' style of the font in the image */
+    
+    /* FIX: Changed to left alignment */
+    text-align: left; 
+    
+    /* FIX: Ensures the 1.1x stretch happens from the left edge, not the center */
     transform: scaleX(1.1);
-    text-align: center;
+    transform-origin: left; 
+    
+    width: 100%;
 }
 
 .hero-subtitle {
-    /* The subtitle in the image is significantly smaller and more spread out */
     font-size: clamp(0.55rem, 0.9vw, 0.75rem);
     font-weight: 700;
     letter-spacing: 3px;
@@ -139,8 +177,11 @@ body {
     text-transform: uppercase;
     max-width: 950px;
     opacity: 0.95;
-    text-align: center;
+    
+    /* Keep left alignment */
+    text-align: left; 
     line-height: 1.6;
+    width: 100%;
 }
 
 
@@ -160,22 +201,45 @@ body {
 /* --- Hero Mobile Text --- */
 @media (max-width: 768px) {
     .hero-title {
-        font-size: 1.5rem; /* Better scale for mobile */
-        letter-spacing: 1px;
-        line-height: 1.3;
-        transform: scaleX(1); /* Reset stretch for readability */
+        text-align: center;
+        transform-origin: center; /* FIX: Prevents the text from shifting left when scaled */
+        margin-left: auto;
+        margin-right: auto;
     }
-
     .hero-subtitle {
-        font-size: 0.65rem;
-        letter-spacing: 1px;
-        margin-bottom: 2rem;
-        padding: 0 10px;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .cta-button {
         padding: 0.7rem 2.5rem; /* Smaller button for thumbs */
         font-size: 0.9rem;
+    }
+
+    .hero-container {
+        flex-direction: column; /* Stacks the image and text vertically */
+        text-align: center;
+        justify-content: center;
+    }
+
+    .hero-text-side {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Centers the button horizontally */
+        text-align: center;    /* Centers the text lines */
+    }
+
+    .hero-image-side {
+        order: -1; /* Puts your profile picture ABOVE the text on mobile */
+        justify-content: center;
+        margin-bottom: 2rem;
+    }
+
+    .profile-circle {
+        width: 250px; /* Smaller size for mobile screens */
+        height: 250px;
     }
 }
 
@@ -184,6 +248,7 @@ body {
     box-shadow: 0 8px 30px rgba(232, 216, 196, 0.5);
     background-color: #f5e8d8;
 }
+
 
 /* --- Responsive Wave Divider --- */
 .wave-divider {
