@@ -365,6 +365,38 @@ body {
 .skills-group.lower {
     padding-left: 6rem; 
 }
+/* --- Reveal Animations --- */
+.reveal {
+    opacity: 0;
+    filter: blur(10px); 
+    transition: 
+        opacity 1.5s ease, 
+        transform 1.2s cubic-bezier(0.2, 1, 0.3, 1), 
+        filter 1.5s ease;
+    will-change: transform, opacity;
+}
+
+.reveal-left { 
+    transform: translateX(-80px); 
+}
+
+.reveal-right { 
+    transform: translateX(80px); 
+}
+
+.reveal.active {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0);
+}
+
+.skills-group.upper.active {
+    transition-delay: 0.2s;
+}
+
+.skills-group.lower.active {
+    transition-delay: 0.4s;
+}
 @media (max-width: 1024px) {
     .skills-container {
         flex-direction: column;
@@ -563,91 +595,387 @@ body {
     color: #E8D8C4;
     font-weight: 400;
 }
-
-/* Horizontal Layout for Details */
-.about-details {
+.about-contact-wrapper {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 4rem; /* Adjust this to control the distance between the two items */
-    margin-top: 3rem;
+    flex-direction: column; /* Stacks Email and Resume vertically */
+    gap: 1.5rem;             /* Adds space between the two links */
+    align-items: flex-start; /* Ensures they align to the left side */
 }
-
-.detail-item p {
+.about-contact-wrapper 
+.social-item {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+    align-items: center;    /* Centers the icon with the text horizontally */
+    gap: 12px;              /* Space between the icon and the words */
+    text-decoration: none;
     color: #E8D8C4;
+    font-size: 0.95rem;
+    transition: opacity 0.3s ease;
+}
+.about-contact-wrapper 
+.social-item:hover {
+    opacity: 0.7;
 }
 
-.detail-item span {
-    margin-right: 12px; 
-    font-size: 1.5rem;   
-    line-height: 1; /* Changed from 0 to 1 to ensure it doesn't collapse */
-    color: #E8D8C4; /* Force the color to match your text */
-    display: inline-block;
-    vertical-align: middle;
+
+/* --- Contact Section --- */
+.contact-section {
+    padding: 100px 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers everything inside the section */
 }
 
-/* Responsive Fix for Mobile */
-@media (max-width: 600px) {
-    .about-section {
-        padding: 5rem 1.5rem; /* Less extreme padding on mobile */
-    }
 
-    .about-details {
-        flex-direction: column;
-        gap: 1rem;
-    }
-}
-/* --- Footer --- */
-.footer {
-    background: linear-gradient(180deg, #000000 0%, #4a7c9c 100%);
-    padding: 4rem 2rem;
-}
-
-.footer-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
+.contact-container {
+    width: 100%;
+    max-width: 800px;
     text-align: center;
 }
 
-/* --- Reveal Animations --- */
-.reveal {
-    opacity: 0;
-    filter: blur(10px); 
-    transition: 
-        opacity 1.5s ease, 
-        transform 1.2s cubic-bezier(0.2, 1, 0.3, 1), 
-        filter 1.5s ease;
-    will-change: transform, opacity;
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 2rem;
 }
 
-.reveal-left { 
-    transform: translateX(-80px); 
+/* Container for Name and Email */
+.form-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
 }
 
-.reveal-right { 
-    transform: translateX(80px); 
+/* Individual group (Label + Input) */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex: 1; /* Makes Name and Email take up equal space */
 }
 
-.reveal.active {
+/* Label Styling */
+.form-group label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    color: #E8D8C4;
+    opacity: 0.8;
+}
+/* --- Responsive Contact Form Fix --- */
+@media (max-width: 768px) {
+    /* Stack Name and Email vertically */
+    .form-row {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    /* Force all form groups to align text and items to the left */
+    .form-group {
+        align-items: flex-start; /* Aligns the input/textarea to the left */
+        text-align: left;        /* Aligns the label text to the left */
+    }
+
+    .form-group label {
+        text-align: left;
+        width: 100%;
+        margin-left: 0;
+    }
+
+    /* Ensures the container doesn't force a center alignment */
+    .contact-form {
+        align-items: flex-start; 
+        padding: 0 20px; /* Optional: adds a little padding so it's not touching the edges */
+    }
+    
+    .cta-button {
+        align-self: flex-start; /* Keeps the 'Send Message' button on the left */
+    }
+}
+
+/* Input & Textarea Styling */
+.form-group input, 
+.form-group textarea {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(232, 216, 196, 0.2);
+    padding: 15px;
+    color: #E8D8C4;
+    font-family: 'Inter', sans-serif;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus, 
+.form-group textarea:focus {
+    border-color: #E8D8C4;
+    outline: none;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+}
+
+.contact-form input, 
+.contact-form textarea {
+    width: 100%;
+    padding: 1.2rem;
+    background: transparent;
+    border: 1px solid rgba(232, 216, 196, 0.2);
+    color: #E8D8C4;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.contact-form input:focus, 
+.contact-form textarea:focus {
+    border-color: #E8D8C4;
+}
+
+/* Centering the top part */
+.contact-header {
+    text-align: center;
+    margin-bottom: 60px; /* Space between the header and the form area */
+    width: 100%;
+}
+
+.contact-header .section-title {
+    font-family: 'Akira Expanded', sans-serif;
+    font-size: 3rem;
+    margin-bottom: 15px;
+    color: #E8D8C4;
+}
+.section-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    color: #E8D8C4;
+    opacity: 0.6;
+    max-width: 600px;
+    margin: 0 auto; /* Centers the paragraph block */
+}
+/* Ensure the wrapper below stays properly aligned */
+.contact-wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    gap: 50px;
+}
+/* Mobile: Stack everything in the center */
+@media (max-width: 768px) {
+    .contact-wrapper {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .contact-header .section-title {
+        font-size: 2rem;
+    }
+}
+/* --- Contact Section Layout --- */
+
+
+.contact-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 100px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.contact-info {
+    flex: 1;
+    text-align: left;
+}
+
+.contact-form-side {
+    flex: 1.5; /* Gives the form more space */
+}
+
+/* Style for the labels (EMAIL, PHONE, etc) */
+.info-item {
+    margin-bottom: 2.5rem;
+}
+
+.info-item span {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: rgba(232, 216, 196, 0.5); /* Faded beige label */
+    margin-bottom: 0.5rem;
+}
+
+.info-item p {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    color: #E8D8C4;
+}
+
+/* Responsive Fix for Mobile */
+@media (max-width: 900px) {
+    .contact-wrapper {
+        flex-direction: column;
+        gap: 50px;
+    }
+    
+    .contact-info {
+        text-align: center;
+    }
+    
+    .contact-info h2 br {
+        display: none; /* Removes line break on mobile */
+    }
+}
+
+/* --- Social Links Styling --- */
+.social-links {
+    display: flex;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.social-links a {
+    color: #E8D8C4;
+    opacity: 0.6;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-links a:hover {
     opacity: 1;
-    filter: blur(0);
-    transform: translateX(0);
+    transform: translateY(-3px); /* Subtle lift on hover */
 }
 
-.skills-group.upper.active {
-    transition-delay: 0.2s;
+.social-links svg {
+    width: 24px;
+    height: 24px;
+}
+/* --- Footer --- */
+.footer {
+    padding: 50px 0;
+    text-align: center;
+    border-top: 1px solid rgba(232, 216, 196, 0.1);
 }
 
-.skills-group.lower.active {
-    transition-delay: 0.4s;
+.footer p {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    color: #E8D8C4;
+    opacity: 0.5;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+    }
+}
+/* --- Optimized Footer & About Alignment --- */
+.footer-info-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+.about-contact-wrapper {
+    display: flex;
+    flex-direction: column; /* Stacks items vertically */
+    gap: 12px;              /* Equal spacing between items */
+    align-items: flex-start; /* Aligns them to the left edge of 'ABOUT' */
+}
+
+.social-item {
+    display: flex;
+    align-items: center;    /* Vertically centers icon with text */
+    gap: 10px;
+    text-decoration: none;
+    color: #E8D8C4;
+    font-size: 0.9rem;
+    font-family: 'Inter', sans-serif;
+    transition: opacity 0.3s ease;
+}
+
+.social-item:hover {
+    opacity: 0.6;
+}
+
+/* --- Responsive Layout --- */
+@media (max-width: 850px) {
+    .footer-info-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 40px;
+    }
+
+    .about-contact-wrapper {
+        align-items: center; /* Centers them on mobile for a better look */
+    }
+}
+
+
+.mini-title {
+    font-family: 'Akira Expanded', sans-serif;
+    font-size: 0.7rem;
+    color: rgba(232, 216, 196, 0.4);
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+.info-column p {
+    font-size: 0.9rem;
+    color: #E8D8C4;
+    line-height: 1.5;
+}
+
+/* --- Social Media with Logo + Text --- */
+.social-links-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.social-item {
+    display: flex;
+    align-items: center; /* Vertically centers icon with text */
+    gap: 10px; /* Space between logo and name */
+    text-decoration: none;
+    color: #E8D8C4;
+    transition: opacity 0.3s ease;
+}
+
+.social-item span {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.social-item:hover {
+    opacity: 0.7;
+}
+
+
+
+
+
 
 
 /* --- Hamburger Menu Styles --- */
