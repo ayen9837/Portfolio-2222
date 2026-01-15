@@ -184,7 +184,22 @@ body {
     width: 100%;
 }
 
+/* This targets ONLY the button inside your contact form */
+.contact-form .cta-button {
+    display: block;
+    margin: 40px auto 0; /* Centers it horizontally */
+    
+    /* You can add specific adjustments here just for this button */
+    /* For example, if you want it wider: */
+    padding: 15px 60px; 
+}
 
+/* Ensure the "View Resume" button (which is likely in the Hero section) 
+   remains at its original alignment */
+.hero .cta-button {
+    display: inline-block;
+    margin: 0; 
+}
 .cta-button {
     display: inline-block;
     background-color: #E8D8C4;
@@ -617,26 +632,19 @@ body {
 }
 
 
-/* --- Contact Section --- */
-.contact-section {
-    padding: 100px 10%;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centers everything inside the section */
+
+/* --- Square Box Layout for Contact Section --- */
+.contact-main-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    max-width: 1200px;
+    margin: 0 auto;
+    border: 1px solid rgba(232, 216, 196, 0.2); /* Main outer border */
 }
 
-
-.contact-container {
-    width: 100%;
-    max-width: 800px;
-    text-align: center;
-}
-
-.contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    margin-top: 2rem;
+.contact-square-box {
+    padding: 50px;
+    border: 1px solid rgba(232, 216, 196, 0.2); /* Middle divider */
 }
 
 /* Container for Name and Email */
@@ -695,22 +703,26 @@ body {
 }
 
 /* Input & Textarea Styling */
+/* Enhanced Modern Borders for Form Fields */
 .form-group input, 
 .form-group textarea {
     width: 100%;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(232, 216, 196, 0.2);
     padding: 15px;
+    background: rgba(255, 255, 255, 0.03); /* Slightly darker background */
+    border: 1px solid rgba(232, 216, 196, 0.2); /* Your beige color with low opacity */
     color: #E8D8C4;
+    border-radius: 4px;
     font-family: 'Inter', sans-serif;
-    transition: border-color 0.3s ease;
+    transition: all 0.3s ease; /* Smooth transition for the border */
+    outline: none;
 }
 
+/* The "Glowing" border effect when you click into a field */
 .form-group input:focus, 
 .form-group textarea:focus {
-    border-color: #E8D8C4;
-    outline: none;
-    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(232, 216, 196, 0.8); /* Border becomes brighter */
+    background: rgba(255, 255, 255, 0.07);
+    box-shadow: 0 0 10px rgba(232, 216, 196, 0.1); /* Subtle outer glow */
 }
 
 /* Mobile Responsiveness */
@@ -720,25 +732,191 @@ body {
         gap: 0;
     }
 }
+/* --- Contact Grid Frame --- */
+.contact-frame-wrapper {
+    display: flex;
+    max-width: 1200px;
+    margin: 40px auto;
+    gap: 40px; /* Space between sidebar and form */
+}
 
+/* Apply the border ONLY to the main form side */
+.contact-side-box.main-form {
+    border: 1px solid rgba(232, 216, 196, 0.3);
+    padding: 40px; /* Gives the form some internal space */
+    background: rgba(255, 255, 255, 0.02); /* Optional: subtle fill for the form area */
+}
+
+.main-form {
+    flex: 1.5; /* Form is wider */
+}
+
+.sidebar-info {
+    flex: 1;
+}
+
+
+/* --- Sharp Square Inputs --- */
+/* Keep form inputs square to match */
 .contact-form input, 
 .contact-form textarea {
-    width: 100%;
-    padding: 1.2rem;
+    border-radius: 0 !important;
+    border: 1px solid rgba(232, 216, 196, 0.3);
     background: transparent;
-    border: 1px solid rgba(232, 216, 196, 0.2);
     color: #E8D8C4;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.9rem;
-    border-radius: 4px;
-    outline: none;
-    transition: border-color 0.3s ease;
+    padding: 15px;
 }
 
-.contact-form input:focus, 
-.contact-form textarea:focus {
-    border-color: #E8D8C4;
+/* Mobile Fix */
+@media (max-width: 850px) {
+    .contact-frame-wrapper {
+        flex-direction: column;
+        padding: 0 20px;
+    }
 }
+/* --- The Clean List Look --- */
+/* THIS IS THE BORDER FOR EACH ITEM */
+/* Ensure the contact list items keep their individual bottom borders if you want the "row" look */
+.contact-list li {
+    border-bottom: 1px solid rgba(232, 216, 196, 0.2);
+    list-style: none;
+}
+.contact-list li {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+}
+
+.contact-list .label {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    color: rgba(232, 216, 196, 0.5);
+    margin-bottom: 5px;
+}
+
+.contact-list .value {
+    font-size: 1rem;
+    color: #E8D8C4;
+}
+.main-form {
+    flex: 1.5;
+}
+
+
+
+/* Responsive */
+@media (max-width: 900px) {
+    .contact-frame-wrapper {
+        flex-direction: column;
+    }
+    .contact-side-box {
+        padding: 40px 20px;
+    }
+}
+.section-title {
+    text-align: center;      /* This centers the text itself */
+    width: 100%;             /* Ensures the element spans the full width to allow centering */
+    margin-left: auto;       /* Standard practice for centering block elements */
+    margin-right: auto;
+    display: block;          /* Ensures it behaves as a block-level element */
+    
+    /* Optional: Add some spacing below the title if needed */
+    margin-bottom: 50px; 
+}
+
+/* --- Sidebar Item Styling --- */
+.contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-list li {
+    border: 1px solid rgba(232, 216, 196, 0.2);
+    margin-bottom: -1px; /* Overlaps borders to keep lines thin and sharp */
+}
+
+/* The box itself is the link */
+.contact-link-wrapper {
+    display: block;
+    padding: 25px;
+    text-decoration: none;
+    color: inherit;
+    background: transparent;
+    transition: all 0.2s ease-in-out;
+}
+
+.contact-item-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+/* --- Interactive States (Hover & Click) --- */
+
+/* 1. Mouse Hover: Changes Background and Text Color */
+.contact-link-wrapper:hover {
+    background: rgba(232, 216, 196, 0.08); /* Subtle highlight */
+}
+
+.contact-link-wrapper:hover .label {
+    color: rgba(232, 216, 196, 1); /* Label brightens */
+}
+
+.contact-link-wrapper:hover .contact-icon {
+    color: #f5e8d8; /* Icon brightens */
+}
+
+/* 2. On Click (Active): Inverts color for instant feedback */
+.contact-link-wrapper:active {
+    background: #E8D8C4;
+}
+
+.contact-link-wrapper:active .label,
+.contact-link-wrapper:active .value,
+.contact-link-wrapper:active .contact-icon {
+    color: #000000; /* Text turns black when background is clicked */
+}
+
+/* --- Text & Icon Styling --- */
+.contact-icon {
+    color: rgba(232, 216, 196, 0.4);
+    transition: color 0.2s ease;
+}
+
+.contact-list .label {
+    font-size: 0.65rem;
+    letter-spacing: 2.5px;
+    color: rgba(232, 216, 196, 0.4);
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.contact-list .value {
+    font-size: 1rem;
+    color: #E8D8C4;
+    display: block;
+}
+
+/* Styling for the Right Side Info */
+.info-box {
+    background: rgba(255, 255, 255, 0.02);
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centers the text vertically in the box */
+}
+
+/* Mobile Responsive adjustment */
+@media (max-width: 850px) {
+    .contact-main-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
 
 /* Centering the top part */
 .contact-header {
@@ -752,6 +930,7 @@ body {
     font-size: 3rem;
     margin-bottom: 15px;
     color: #E8D8C4;
+    
 }
 .section-subtitle {
     font-family: 'Inter', sans-serif;
