@@ -25,6 +25,8 @@ html, body {
     /* This locks the screen horizontally to prevent side-scrolling */
     overflow-x: hidden; 
     font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
     background-color: #000000;
     color: #E8D8C4;
     scroll-behavior: smooth;
@@ -39,7 +41,7 @@ body {
     overflow-x: hidden;
 }
 
-/* --- Navigation --- */
+
 /* --- Navigation --- */
 .navbar {
     position: fixed;
@@ -580,57 +582,216 @@ body {
 }
 
 
-/* --- About Section --- */
-/* --- About Section --- */
-.about-section {
-    background-color: #000000;
-    padding: 10rem 2rem; /* Increased padding for better spacing */
-    text-align: center;
-}
-
-.about-container {
-    max-width: 1100px;
+/* --- About Section Layers --- */
+.about-layers {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 900px;
     margin: 0 auto;
 }
 
-.about-title {
-    font-family: 'Inter', sans-serif; /* Simplified for the minimalist look */
-    font-size: 1rem;
-    font-weight: 500;
+.about-card {
+    background: rgba(232, 216, 196, 0.03);
+    border: 1px solid rgba(232, 216, 196, 0.1);
+    padding: 40px;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    cursor: default;
+}
+
+/* Hover Animation: Lift and Glow */
+.about-card:hover {
+    background: rgba(232, 216, 196, 0.06);
+    border-color: rgba(232, 216, 196, 0.4);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Card Labels (The 01, 02, 03) */
+.card-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    color: rgba(232, 216, 196, 0.4);
+    display: block;
+    margin-bottom: 20px;
+}
+
+/* --- Updated Education Styling --- */
+
+.about-card.layer-2 .card-content {
+    margin-top: 15px;
+}
+
+/* Forces the Program and Year to sit on the same line like Experience */
+.about-card.layer-2 .exp-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 5px;
+}
+
+.program {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem; /* Matches .exp-type exactly */
     color: #E8D8C4;
-    margin-bottom: 3rem;
+    letter-spacing: 1px;
+    margin: 0; /* Reset margins to align with flexbox */
+}
+
+.year {
+    font-size: 0.8rem; /* Matches .exp-year exactly */
+    color: rgba(232, 216, 196, 0.5);
+    text-align: right;
+}
+
+.info {
+    font-size: 0.9rem; /* Ordinary text size */
+    line-height: 1.6;
+    color: rgba(232, 216, 196, 0.7);
+    margin-top: 8px;
+}
+/* Container for the experience items */
+.experience-list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Individual row styling */
+.exp-bullet-item {
+    display: flex;
+    gap: 15px;
+    position: relative;
+}
+
+/* The custom bullet point (Beige Square/Dot) */
+.exp-bullet-marker {
+    width: 8px;
+    height: 8px;
+    background-color: #E8D8C4;
+    margin-top: 10px; /* Aligns with the first line of text */
+    flex-shrink: 0;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+/* Light up the bullet on hover */
+.about-card:hover .exp-bullet-marker {
+    opacity: 1;
+    box-shadow: 0 0 10px rgba(232, 216, 196, 0.5);
+}
+
+.exp-content {
+    flex: 1;
+}
+
+/* Header line with Type and Year */
+.exp-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 5px;
+}
+
+.exp-type {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    color: #E8D8C4;
     letter-spacing: 1px;
 }
 
-.about-intro, .about-description {
-    font-size: clamp(0.9rem, 1.2vw, 1.1rem);
-    line-height: 1.6;
-    max-width: 900px;
-    margin: 0 auto 1.2rem;
-    color: #E8D8C4;
-    font-weight: 400;
-}
-.about-contact-wrapper {
-    display: flex;
-    flex-direction: column; /* Stacks Email and Resume vertically */
-    gap: 1.5rem;             /* Adds space between the two links */
-    align-items: flex-start; /* Ensures they align to the left side */
-}
-.about-contact-wrapper 
-.social-item {
-    display: flex;
-    align-items: center;    /* Centers the icon with the text horizontally */
-    gap: 12px;              /* Space between the icon and the words */
-    text-decoration: none;
-    color: #E8D8C4;
-    font-size: 0.95rem;
-    transition: opacity 0.3s ease;
-}
-.about-contact-wrapper 
-.social-item:hover {
-    opacity: 0.7;
+.exp-year {
+    font-size: 0.8rem;
+    color: rgba(232, 216, 196, 0.5);
 }
 
+.exp-title {
+    font-size: 0.95rem;
+    color: #E8D8C4;
+    font-weight: 500;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.exp-description {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: rgba(232, 216, 196, 0.7);
+}
+/* --- Responsive About Section --- */
+
+@media (max-width: 992px) {
+    .about-layers {
+        /* Reduce the aggressive vertical stacking for tablets */
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding-bottom: 50px;
+    }
+
+    .about-card {
+        /* Stop the cards from being absolute/overlapping so they can stack */
+        position: relative !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        transform: none !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-container {
+        padding: 0 20px;
+    }
+
+    .about-intro {
+        font-size: 1.1rem;
+        line-height: 1.5;
+    }
+
+    /* Adjust Experience list for mobile */
+    .exp-meta {
+        flex-direction: column; /* Stacks 'Internship' and 'Year' vertically */
+        gap: 5px;
+    }
+
+    .exp-type {
+        font-size: 1.2rem;
+    }
+
+    .exp-year {
+        font-size: 0.75rem;
+        opacity: 0.6;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-title {
+        font-size: 2.5rem;
+        margin-bottom: 30px;
+    }
+
+    .about-card {
+        padding: 25px 20px;
+    }
+
+    .card-label {
+        font-size: 0.7rem;
+        margin-bottom: 15px;
+    }
+
+    .exp-title {
+        font-size: 0.85rem;
+    }
+
+    .exp-description {
+        font-size: 0.8rem;
+    }
+}
 
 
 /* --- Square Box Layout for Contact Section --- */
@@ -960,6 +1121,16 @@ body {
         font-size: 2rem;
     }
 }
+
+/* --- Contact Section Spacing Fix --- */
+.contacts-section {
+    padding-top: 100px;    /* Increases space from the About section */
+    padding-bottom: 100px; /* Space at the very bottom of the page */
+    background-color: #000000;
+    position: relative;
+}
+
+
 /* --- Contact Section Layout --- */
 
 
