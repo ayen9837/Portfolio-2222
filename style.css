@@ -99,24 +99,49 @@ body {
     position: relative;
     min-height: 100vh;
     display: flex;
-    align-items: center; /* Vertically centers the content container */
-    
-    /* This creates the gap from the navbar without moving the wave */
-    padding-top: 100px; 
-    padding-bottom: 100px; 
-    
-    background-color: #000000;
+    align-items: center; /* Centers text/image vertically */
     overflow: hidden;
 }
+/* Gradient Circles Design */
+/* Background Design: Connected Gradient Circles */
+.hero::before, .hero::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Top Right Circle */
+.hero::before {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(199, 166, 126, 0.2), transparent);
+    top: -150px;
+    right: -100px;
+}
+
+/* Bottom Left Circle */
+.hero::after {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(232, 216, 196, 0.1), transparent);
+    bottom: -150px;
+    left: -200px;
+}
+/* --- Content Layering --- */
 .hero-container {
+    position: relative;
+    z-index: 10; /* Above circles */
+    width: 100%;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 5%;
     display: flex;
-    align-items: center;
+    flex-direction: row;
     justify-content: space-between;
-    width: 100%;
-    z-index: 2; /* Keeps text above sparks */
+    align-items: center;
 }
 .hero-text-side {
     flex: 1;
@@ -150,7 +175,22 @@ body {
     z-index: 2;
     margin-bottom: 50px; /* Pushes the button up away from the rising dunes */
 }
+/* --- Divider Laptop Fix --- */
+.wave-divider {
+    position: absolute;
+    bottom: -1px; /* Prevents a tiny gap at the bottom */
+    left: 0;
+    width: 100%;
+    line-height: 0;
+    z-index: 2; /* Sits behind text but above background colors */
+    pointer-events: none; /* Allows you to click things 'through' the wave */
+}
 
+.wave-divider svg {
+    display: block;
+    width: 100%;
+    height: 150px; /* Adjust this to change the wave height on laptop */
+}
 .hero-title {
     font-family: 'Akira Expanded', sans-serif;
     font-size: clamp(1.4rem, 4.2vw, 2.8rem); 
@@ -219,6 +259,12 @@ body {
     transition: all 0.3s ease;
     box-shadow: none; /* Keeps it flat and modern like the image */
 }
+/* Laptop/Desktop Specific Adjustments */
+@media (min-width: 1024px) {
+    .wave-divider svg {
+        height: 200px; /* Makes it more prominent on laptops */
+    }
+}
 /* --- Hero Mobile Text --- */
 @media (max-width: 992px) {
     .hero {
@@ -237,7 +283,7 @@ body {
     }
 
     .cta-button {
-        display: inline-block !important;
+        display: inline-block center!important;
         margin: 20px auto 0 auto !important; /* Forces horizontal centering */
         width: fit-content !important;
         text-align: center;
@@ -272,7 +318,11 @@ body {
     box-shadow: 0 8px 30px rgba(232, 216, 196, 0.5);
     background-color: #f5e8d8;
 }
-
+@media (max-width: 768px) {
+    .wave-divider svg {
+        height: 80px; /* Smaller wave for mobile */
+    }
+}
 
 /* --- Responsive Wave Divider --- */
 @media (max-width: 768px) {
@@ -831,6 +881,7 @@ body {
     border: 1px solid rgba(232, 216, 196, 0.2); /* Main outer border */
 }
 
+
 .contact-square-box {
     padding: 50px;
     border: 1px solid rgba(232, 216, 196, 0.2); /* Middle divider */
@@ -881,13 +932,8 @@ body {
     }
 
     /* Ensures the container doesn't force a center alignment */
-    .contact-form {
-        align-items: flex-start; 
-        padding: 0 20px; /* Optional: adds a little padding so it's not touching the edges */
-    }
-    
-    .cta-button {
-        align-self: flex-start; /* Keeps the 'Send Message' button on the left */
+    .contact-form .cta-button {
+        width: 100%; /* Full width button on very small screens for better UX */
     }
 }
 
