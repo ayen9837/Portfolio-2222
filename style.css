@@ -96,26 +96,27 @@ body {
 
 /* --- Hero Section --- */
 .hero {
+    position: relative;
     min-height: 100vh;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    /* Mimics the cinematic lighting effect in your photo */
-    background: radial-gradient(circle at center, #0e161d 0%, #000000 100%);
-    padding: 0 12%;
-    position: relative;
+    align-items: center; /* Vertically centers the content container */
+    
+    /* This creates the gap from the navbar without moving the wave */
+    padding-top: 100px; 
+    padding-bottom: 100px; 
+    
+    background-color: #000000;
     overflow: hidden;
 }
 .hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 5%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    max-width: 1200px; /* Limits how wide the content spreads */
-    margin: 0 auto;
-    padding: 0 5%;
-    z-index: 2; /* Keeps text above the spark background */
+    z-index: 2; /* Keeps text above sparks */
 }
 .hero-text-side {
     flex: 1;
@@ -153,12 +154,14 @@ body {
 .hero-title {
     font-family: 'Akira Expanded', sans-serif;
     font-size: clamp(1.4rem, 4.2vw, 2.8rem); 
-    font-weight: 120;
     line-height: 1.1;
     margin: 0 0 1.5rem 0;
+    margin-bottom: 20px;
     color: #E8D8C4;
     text-transform: uppercase;
     letter-spacing: 5px; 
+    
+    
     
     /* FIX: Changed to left alignment */
     text-align: left; 
@@ -168,6 +171,7 @@ body {
     transform-origin: left; 
     
     width: 100%;
+    display: block;
 }
 
 .hero-subtitle {
@@ -216,7 +220,10 @@ body {
     box-shadow: none; /* Keeps it flat and modern like the image */
 }
 /* --- Hero Mobile Text --- */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
+    .hero {
+        padding-top: 120px; /* Even more clearance for small phone navbars */
+    }
     .hero-title {
         text-align: center;
         transform-origin: center; /* FIX: Prevents the text from shifting left when scaled */
@@ -230,8 +237,10 @@ body {
     }
 
     .cta-button {
-        padding: 0.7rem 2.5rem; /* Smaller button for thumbs */
-        font-size: 0.9rem;
+        display: inline-block !important;
+        margin: 20px auto 0 auto !important; /* Forces horizontal centering */
+        width: fit-content !important;
+        text-align: center;
     }
 
     .hero-container {
@@ -241,17 +250,15 @@ body {
     }
 
     .hero-text-side {
-        width: 100%;
         display: flex;
         flex-direction: column;
-        align-items: center; /* Centers the button horizontally */
-        text-align: center;    /* Centers the text lines */
+        align-items: center; /* This centers the button horizontally */
     }
 
     .hero-image-side {
         order: -1; /* Puts your profile picture ABOVE the text on mobile */
         justify-content: center;
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
     }
 
     .profile-circle {
@@ -268,6 +275,7 @@ body {
 
 
 /* --- Responsive Wave Divider --- */
+@media (max-width: 768px) {
 .wave-divider {
     position: absolute;
     bottom: -5px; /* Increased overlap to ensure no gaps when scaling */
@@ -287,30 +295,50 @@ body {
     height: 290px; 
     transition: height 0.3s ease;
 }
+}
 
 /* Tablet Adjustment */
 @media (max-width: 1024px) {
+    .wave-divider {
+        height: 200px; /* Increase this value to show more of the wave */
+        bottom: -1px; /* Prevents tiny gaps at the bottom */
+    }
+
     .wave-divider svg {
-        height: 190px; 
+        height: 100%; /* Ensures the SVG fills the taller container */
+        width: 150%;  /* Optional: Stretches width slightly for a more dramatic look */
+        margin-left: -25%; /* Keeps the stretched wave centered */
     }
 }
 
 /* Phone Adjustment */
 @media (max-width: 768px) {
+    .wave-divider {
+        height: 200px; /* Increase this value to show more of the wave */
+        bottom: -1px; /* Prevents tiny gaps at the bottom */
+    }
+
     .wave-divider svg {
-        height: 130px; 
+        height: 100%; /* Ensures the SVG fills the taller container */
+        width: 150%;  /* Optional: Stretches width slightly for a more dramatic look */
+        margin-left: -25%; /* Keeps the stretched wave centered */
     }
     
     .hero {
         /* Extra bottom padding so text stays clear of the larger wave */
         padding-bottom: 100px; 
     }
+    
 }
 
 /* Small Phone Adjustment */
 @media (max-width: 480px) {
-    .wave-divider svg {
-        height: 90px;
+    .hero {
+        padding-top: 100px; /* More clearance from the navbar */
+    }
+    
+    .wave-divider {
+        height: 150px; /* Adjusted for smaller screens */
     }
 }
 
