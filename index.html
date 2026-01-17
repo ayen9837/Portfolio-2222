@@ -100,10 +100,10 @@
             </div>
             
             <div class="skills-group lower reveal reveal-right">
-                <p>Kinetic Typography</p>
-                <p>Creative Editorial</p>
-                <p>Title Design</p>
-            </div>
+    <p>Kinetic Typography</p>
+    <p>Creative Editorial</p>
+    <p>Title Design</p>
+</div>
         </div>
 
         <div id="skills-keyboard-root"></div>
@@ -604,18 +604,17 @@ document.getElementById('contactForm').addEventListener('submit', async function
 <script type="text/babel">
     const { motion } = window.Motion || {};
 
-    // FIXED: Added { img } to the arguments so the component can see the pictures
-    const Key = ({ label, skill, img }) => (
+    // Added 'bgColor' to the component props
+    const Key = ({ skill, img, bgColor }) => (
         <motion.div 
             className="skill-key"
-            whileHover={{ y: 4, filter: "drop-shadow(0 2px 0 rgba(0,0,0,1))" }}
-            whileTap={{ y: 4, filter: "drop-shadow(0 2px 0 rgba(0,0,0,1))" }}
+            style={{ backgroundColor: bgColor || '#1a1a1a' }} // Uses the color from data, or defaults to dark grey
+            whileHover={{ y: -5, scale: 1.05, filter: "brightness(1.2)" }}
+            whileTap={{ scale: 0.95 }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
         >
-            <span className="key-label">{label}</span>
-            {/* The image now consumes the key area */}
             <img src={img} alt={skill} className="key-logo" />
         </motion.div>
     );
@@ -625,23 +624,16 @@ document.getElementById('contactForm').addEventListener('submit', async function
 
         const rows = [
             [
-                {l:'Q', s:'AE', img: 'logo/After Effects Logo.png'}, 
-                {l:'W', s:'PR', img: 'logo/Canva.png'}, 
-                {l:'E', s:'PS', img: 'logo/Figma.png'}, 
-                {l:'R', s:'AI', img: 'logo/adobe illustrator.png'}, 
-                {l:'T', s:'C4D', img: 'logo/CapCut.png'}
+                {s:'AE', img: 'logo/After Effects Logo.png', bgColor: '#00005b'}, // Deep Blue
+                {s:'PR', img: 'logo/Canva.png', bgColor: '#00c4cc'},             // Canva Teal
+                {s:'PS', img: 'logo/Figma.png', bgColor: '#333333'},            // Figma Grey
+                {s:'AI', img: 'logo/adobe illustrator.png', bgColor: '#330000'}, // Dark Maroon
+                {s:'T', img: 'logo/CapCut.png', bgColor: '#ffffff'}              // Black
             ],
             [
-                {l:'A', s:'JS', img: 'logo/javascript.png'}, 
-                {l:'S', s:'REACT', img: 'logo/html.png'}, 
-                {l:'D', s:'HTML', img: 'logo/html.png'}, 
-                {l:'F', s:'CSS', img: 'logo/css.png'}, 
-                {l:'G', s:'GSAP', img: 'logo/gsap.png'}
-            ],
-            [
-                {l:'Z', s:'FIGMA', img: 'logo/figma.png'}, 
-                {l:'X', s:'UI/UX', img: 'logo/ux.png'}, 
-                {l:'C', s:'MOTION', img: 'logo/motion.png'}
+                {s:'JS', img: 'logo/javascript.png', bgColor: '#f7df1e'},       // JS Yellow
+                {s:'D', img: 'logo/html.png', bgColor: '#e34f26'},              // HTML Orange
+                {s:'F', img: 'logo/css.png', bgColor: '#1572b6'}                 // CSS Blue
             ]
         ];
 
@@ -649,8 +641,13 @@ document.getElementById('contactForm').addEventListener('submit', async function
             <div className="keyboard-container">
                 {rows.map((row, i) => (
                     <div key={i} className="keyboard-row">
-                        {row.map(key => (
-                            <Key key={key.l} label={key.l} skill={key.s} img={key.img} />
+                        {row.map((key, index) => (
+                            <Key 
+                                key={index} 
+                                skill={key.s} 
+                                img={key.img} 
+                                bgColor={key.bgColor} 
+                            />
                         ))}
                     </div>
                 ))}
@@ -658,7 +655,6 @@ document.getElementById('contactForm').addEventListener('submit', async function
         );
     };
 
-    // FIXED: React 18 Rendering Logic
     const container = document.getElementById('skills-keyboard-root');
     if (container) {
         const root = ReactDOM.createRoot(container);

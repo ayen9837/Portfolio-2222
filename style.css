@@ -394,8 +394,8 @@ body {
 
 /* Container for the whole keyboard */
 :root {
-    --key-size: 85px; /* Default size for Desktop */
-    --key-gap: 12px;
+    --key-size: clamp(45px, 8vw, 85px); /* Automatically scales based on screen size */
+    --key-gap: clamp(6px, 1.5vw, 12px);
 }
 #skills-keyboard-root {
     flex: 1;
@@ -409,46 +409,49 @@ body {
     display: flex;
     flex-direction: column;
     gap: var(--key-gap);
-    /* Scale the entire keyboard slightly if it's still too big */
-    transform-origin: center;
+    width: fit-content;
 }
 
 .keyboard-row {
     display: flex;
-    gap: 10px;
+    gap: var(--key-gap);
 }
-.keyboard-row:nth-child(2) { padding-left: calc(var(--key-size) * 0.4); }
+.keyboard-row:nth-child(2) { padding-left: 35px; }
 .keyboard-row:nth-child(3) { padding-left: calc(var(--key-size) * 0.8); }
 /* --- THE MECHANICAL KEY DESIGN --- */
+/* --- THE BOX DESIGN --- */
 .skill-key {
     width: var(--key-size);
     height: var(--key-size);
-    background: transparent;
-    border: none;
+    /* Remove the fixed background color here */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
     display: flex;
-    position: relative;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
     cursor: pointer;
-    /* Use filter shadow so it follows the logo shape */
-    filter: drop-shadow(0 6px 0 rgba(0,0,0,0.8));
-    transition: all 0.1s ease;
+    position: relative;
+    box-shadow: 0 6px 0 #000;
+    transition: transform 0.1s ease, filter 0.1s ease;
 }
 
 /* Key labels */
 .key-label {
     position: absolute;
-    top: 8px;
-    left: 8px;
+    top: 5px;
+    left: 5px;
     font-family: 'Akira Expanded', sans-serif;
-    font-size: 10px;
+    font-size: clamp(8px, 1vw, 11px);
     color: #E8D8C4;
-    text-shadow: 1px 1px 2px #000; /* Makes letter readable over the logo */
     z-index: 2;
-    opacity: 0.7;
+    pointer-events: none;
 }
 .key-logo {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: contain; /* Ensures logo fits perfectly inside the box */
+    display: block;
 }
 
 /* Skill names inside keys */
@@ -459,9 +462,14 @@ body {
     text-align: right;
     line-height: 1;
 }
+/* Animation for when the 'Box' is pressed */
 .skill-key:hover {
+    transform: translateY(-2px);
+    background: #222;
+}
+.skill-key:active {
     transform: translateY(4px);
-    filter: drop-shadow(0 2px 0 rgba(0,0,0,1));
+    box-shadow: 0 2px 0 #000;
 }
 /* --- MOBILE RESPONSIVE BREAKPOINTS --- */
 
@@ -470,6 +478,20 @@ body {
     :root {
         --key-size: 70px;
         --key-gap: 10px;
+    }
+}
+/* MOBILE ADJUSTMENT: Stack text and keyboard */
+@media (max-width: 1024px) {
+    .skills-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 60px 20px;
+    }
+    
+    .skills-list-wrapper {
+        align-items: center;
+        margin-bottom: 40px;
     }
 }
 
@@ -550,14 +572,16 @@ body {
     position: relative;
     z-index: 2;
     text-shadow: -2px -2px 0px rgba(0,0,0,0.3), -5px -5px 0px rgba(0,0,0,0.1);
+    display: inline-block;
 }
 
 .skills-list-wrapper {
     display: flex;
-    flex-direction: column;   /* Title on top, Groups below */
-    align-items: flex-start;  /* Everything hugs the left wall */
-    text-align: left;
-    flex: 1;                  /* Takes up the left column space */
+    flex-direction: column;
+    align-items: flex-start; 
+    width: fit-content;      /* MAGIC LINE: Shrinks the box to match the 'Skills' width */
+    flex: 0 1 auto;
+    position: relative;
 }
 .skills-group.upper p
 {
@@ -567,17 +591,28 @@ body {
     margin-bottom: 0.8rem;
     text-align: left; /* Keep text left aligned */
 }
+.skills-group.upper {
+    align-self: flex-start;
+    text-align: left;
+}
 .skills-group.lower p {
     color: #E8D8C4;
     font-family: 'Bebas Neue', sans-serif;
     font-size: clamp(1.2rem, 2vw, 1.8rem);
     margin-bottom: 0.8rem;
     text-align: right; /* Keep text left aligned */
+    width: 100%;
+    white-space: nowrap;
 }
 
 .skills-group.lower {
-    padding-left: 0 !important; /* Forces removal of any old offset */
+    width: 100%;             /* Fills the 'fit-content' width of the parent */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;   /* Aligns the end of the text to the right edge */
     margin-top: 20px;
+    padding-left: 0 !important;
+    margin-right: 15px;
 }
 /* --- Reveal Animations --- */
 .reveal {
