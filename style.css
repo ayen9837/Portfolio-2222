@@ -392,73 +392,192 @@ body {
     }
 }
 
+/* Container for the whole keyboard */
+:root {
+    --key-size: 85px; /* Default size for Desktop */
+    --key-gap: 12px;
+}
+#skills-keyboard-root {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+/* --- THE STAGGERED KEYBOARD --- */
+.keyboard-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--key-gap);
+    /* Scale the entire keyboard slightly if it's still too big */
+    transform-origin: center;
+}
+
+.keyboard-row {
+    display: flex;
+    gap: 10px;
+}
+.keyboard-row:nth-child(2) { padding-left: calc(var(--key-size) * 0.4); }
+.keyboard-row:nth-child(3) { padding-left: calc(var(--key-size) * 0.8); }
+/* --- THE MECHANICAL KEY DESIGN --- */
+.skill-key {
+    width: var(--key-size);
+    height: var(--key-size);
+    background: transparent;
+    border: none;
+    display: flex;
+    position: relative;
+    cursor: pointer;
+    /* Use filter shadow so it follows the logo shape */
+    filter: drop-shadow(0 6px 0 rgba(0,0,0,0.8));
+    transition: all 0.1s ease;
+}
+
+/* Key labels */
+.key-label {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    font-family: 'Akira Expanded', sans-serif;
+    font-size: 10px;
+    color: #E8D8C4;
+    text-shadow: 1px 1px 2px #000; /* Makes letter readable over the logo */
+    z-index: 2;
+    opacity: 0.7;
+}
+.key-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Skill names inside keys */
+.key-skill {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    color: #E8D8C4;
+    text-align: right;
+    line-height: 1;
+}
+.skill-key:hover {
+    transform: translateY(4px);
+    filter: drop-shadow(0 2px 0 rgba(0,0,0,1));
+}
+/* --- MOBILE RESPONSIVE BREAKPOINTS --- */
+
+/* For Tablets/Small Laptops */
+@media (max-width: 1200px) {
+    :root {
+        --key-size: 70px;
+        --key-gap: 10px;
+    }
+}
+
+/* For Phones */
+@media (max-width: 768px) {
+    :root {
+        --key-size: 55px; /* Keys get smaller so they don't go off-screen */
+        --key-gap: 8px;
+    }
+    
+    .skills-container {
+        flex-direction: column; /* Stack text above keyboard on mobile */
+        align-items: center;
+        gap: 40px;
+    }
+
+    .keyboard-row {
+        gap: 6px;
+    }
+}
+
+/* For very small phones (iPhone SE, etc.) */
+@media (max-width: 430px) {
+    :root {
+        --key-size: 45px;
+    }
+    .keyboard-row:nth-child(2) { padding-left: 15px; }
+    .keyboard-row:nth-child(3) { padding-left: 30px; }
+}
+
+/* Row Staggering (The Diagonal Look) */
+.keyboard-row:nth-child(2) { padding-left: 35px; }
+.keyboard-row:nth-child(3) { padding-left: 75px; }
+/* MOBILE RESPONSIVE: Stacks them back to vertical on phones */
+@media (max-width: 1024px) {
+    .skills-container {
+        flex-direction: column;
+        gap: 50px;
+    }
+    .skills-list-wrapper {
+        align-items: center;
+        text-align: center;
+    }
+}
+
 /* --- Skills Section --- */
 .skills-section {
+    width: 100%;
     background: linear-gradient(180deg, #141e22 0%, #2d4a53 35%, #6d929b 70%, #d8b094 100%);
-    padding: 10rem 2rem;
+    padding: 100px 0;
     position: relative;
     overflow: hidden;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
-
 .skills-container {
+    display: flex;
+    flex-direction: row;      /* Side-by-side: Text on Left, Keyboard on Right */
+    justify-content: space-between; 
+    align-items: center;      /* Vertically centers the text block with the keyboard */
+    width: 100%;
     max-width: 1400px;
     margin: 0 auto;
-    width: 100%;
-    display: flex;
-    /* Changed from space-between to center to pull both elements together */
-    justify-content: center; 
-    align-items: center;
-    position: relative;
-    /* This gap controls how close the list is to the big 'skills' text */
-    gap: 16rem; 
+    padding: 100px 5%;
+    gap: 60px;
 }
 
 .skills-bg-text {
     font-family: 'Poppins', sans-serif;
-    font-size: clamp(6rem, 20vw, 18rem); 
+    font-size: clamp(5rem, 15vw, 10rem); 
     font-weight: 800;
     color: #000000;
     line-height: 0.8;
-    
-    /* REVERTED: Back to your original deep overlap */
-    letter-spacing: -45px; 
-    
-    /* Kept this fixed so your Capital 'S' from HTML shows up */
+    letter-spacing: -15px;
+    margin-bottom: 40px;      /* Space between title and groups */
     text-transform: none; 
-    
     position: relative;
-    z-index: 1;
+    z-index: 2;
     text-shadow: -2px -2px 0px rgba(0,0,0,0.3), -5px -5px 0px rgba(0,0,0,0.1);
 }
 
 .skills-list-wrapper {
     display: flex;
-    flex-direction: column;
-    gap: 4rem;
-    z-index: 2;
+    flex-direction: column;   /* Title on top, Groups below */
+    align-items: flex-start;  /* Everything hugs the left wall */
+    text-align: left;
+    flex: 1;                  /* Takes up the left column space */
 }
-
-.skills-group.upper p {
+.skills-group.upper p
+{
     color: #E8D8C4;
-    font-size: clamp(1rem, 1.8vw, 1.3rem);
-    font-weight: 500;
-    margin-bottom: 1rem;
-    text-align: left;
-    opacity: 0.9;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(1.2rem, 2vw, 1.8rem);
+    margin-bottom: 0.8rem;
+    text-align: left; /* Keep text left aligned */
 }
-
 .skills-group.lower p {
-    color: #000000; 
-    font-size: clamp(1rem, 1.8vw, 1.3rem);
-    font-weight: 600; 
-    margin-bottom: 1rem;
-    text-align: left;
+    color: #E8D8C4;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(1.2rem, 2vw, 1.8rem);
+    margin-bottom: 0.8rem;
+    text-align: right; /* Keep text left aligned */
 }
 
 .skills-group.lower {
-    padding-left: 6rem; 
+    padding-left: 0 !important; /* Forces removal of any old offset */
+    margin-top: 20px;
 }
 /* --- Reveal Animations --- */
 .reveal {

@@ -10,8 +10,11 @@
     <link rel="stylesheet" href="style.css">
     
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+<script src="https://unpkg.com/framer-motion@11.11.17/dist/framer-motion.js"></script>
+
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <style>
         /* This ensures the React Spark component covers the entire background of the hero */
@@ -86,21 +89,27 @@
 </section>
 
     <section id="skills" class="skills-section">
-        <div class="skills-container">
+    <div class="skills-container">
+        
+        <div class="skills-list-wrapper">
             <div class="skills-bg-text reveal reveal-left">Skills</div>
-            <div class="skills-list-wrapper">
-                <div class="skills-group upper reveal reveal-right">
-                    <p>Motion Graphic  & Design</p>
-                    <p>Visual Effects</p>
-                </div>
-                <div class="skills-group lower reveal reveal-right">
-                    <p>Kinetic Typography</p>
-                    <p>Creative Editorial</p>
-                    <p>Title Design</p>
-                </div>
+            
+            <div class="skills-group upper reveal reveal-right">
+                <p>Motion Graphic & Design</p>
+                <p>Visual Effects</p>
+            </div>
+            
+            <div class="skills-group lower reveal reveal-right">
+                <p>Kinetic Typography</p>
+                <p>Creative Editorial</p>
+                <p>Title Design</p>
             </div>
         </div>
-    </section>
+
+        <div id="skills-keyboard-root"></div>
+        
+    </div>
+</section>
 
     <section id="projects" class="works-section">
     <h2 class="works-title reveal">WORKS</h2>
@@ -591,6 +600,70 @@ document.getElementById('contactForm').addEventListener('submit', async function
         alert("Error: Check your internet connection.");
     }
 });
+</script>
+<script type="text/babel">
+    const { motion } = window.Motion || {};
+
+    // FIXED: Added { img } to the arguments so the component can see the pictures
+    const Key = ({ label, skill, img }) => (
+        <motion.div 
+            className="skill-key"
+            whileHover={{ y: 4, filter: "drop-shadow(0 2px 0 rgba(0,0,0,1))" }}
+            whileTap={{ y: 4, filter: "drop-shadow(0 2px 0 rgba(0,0,0,1))" }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+        >
+            <span className="key-label">{label}</span>
+            {/* The image now consumes the key area */}
+            <img src={img} alt={skill} className="key-logo" />
+        </motion.div>
+    );
+
+    const SkillsKeyboard = () => {
+        if (!window.Motion) return null;
+
+        const rows = [
+            [
+                {l:'Q', s:'AE', img: 'logo/After Effects Logo.png'}, 
+                {l:'W', s:'PR', img: 'logo/Canva.png'}, 
+                {l:'E', s:'PS', img: 'logo/Figma.png'}, 
+                {l:'R', s:'AI', img: 'logo/adobe illustrator.png'}, 
+                {l:'T', s:'C4D', img: 'logo/CapCut.png'}
+            ],
+            [
+                {l:'A', s:'JS', img: 'logo/javascript.png'}, 
+                {l:'S', s:'REACT', img: 'logo/html.png'}, 
+                {l:'D', s:'HTML', img: 'logo/html.png'}, 
+                {l:'F', s:'CSS', img: 'logo/css.png'}, 
+                {l:'G', s:'GSAP', img: 'logo/gsap.png'}
+            ],
+            [
+                {l:'Z', s:'FIGMA', img: 'logo/figma.png'}, 
+                {l:'X', s:'UI/UX', img: 'logo/ux.png'}, 
+                {l:'C', s:'MOTION', img: 'logo/motion.png'}
+            ]
+        ];
+
+        return (
+            <div className="keyboard-container">
+                {rows.map((row, i) => (
+                    <div key={i} className="keyboard-row">
+                        {row.map(key => (
+                            <Key key={key.l} label={key.l} skill={key.s} img={key.img} />
+                        ))}
+                    </div>
+                ))}
+            </div>
+        );
+    };
+
+    // FIXED: React 18 Rendering Logic
+    const container = document.getElementById('skills-keyboard-root');
+    if (container) {
+        const root = ReactDOM.createRoot(container);
+        root.render(<SkillsKeyboard />);
+    }
 </script>
 </body>
 
