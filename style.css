@@ -101,6 +101,7 @@ body {
     display: flex;
     align-items: center; /* Centers text/image vertically */
     overflow: hidden;
+    background:#080A0D; 
 }
 /* Gradient Circles Design */
 /* Background Design: Connected Gradient Circles */
@@ -115,18 +116,18 @@ body {
 
 /* Top Right Circle */
 .hero::before {
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(199, 166, 126, 0.2), transparent);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, #1B2D36, transparent);
     top: -150px;
     right: -100px;
 }
 
 /* Bottom Left Circle */
 .hero::after {
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(232, 216, 196, 0.1), transparent);
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, #1B2D36, transparent);
     bottom: -150px;
     left: -200px;
 }
@@ -674,7 +675,7 @@ body {
 }
 /* --- Works Section --- */
 .works-section {
-    background: linear-gradient(180deg, #d8b094 0%, #000000 100%);
+    background: linear-gradient(180deg, #d8b094 0%, #080A0D 100%);
     padding: 8rem 0;
     overflow: hidden;
 }
@@ -683,7 +684,7 @@ body {
     font-family: 'Akira Expanded', sans-serif;
     font-size: clamp(3rem, 10vw, 6rem);
     font-weight: 900;
-    color: #1a2332;
+    color: #000000;
     text-align: center;
     margin-bottom: 5rem;
 }
@@ -815,6 +816,12 @@ body {
 
 
 /* --- About Section Layers --- */
+.about-section {
+    padding: 100px 0;
+    background-color: #080A0D; /* Updated from black to 1E1E1E */
+    position: relative;
+    overflow: hidden;
+}
 .about-layers {
     display: flex;
     flex-direction: column;
@@ -1024,7 +1031,6 @@ body {
         font-size: 0.8rem;
     }
 }
-
 
 /* --- Square Box Layout for Contact Section --- */
 .contact-main-grid {
@@ -1354,7 +1360,7 @@ body {
 .contacts-section {
     padding-top: 100px;    /* Increases space from the About section */
     padding-bottom: 100px; /* Space at the very bottom of the page */
-    background-color: #000000;
+    background-color: #080A0D;
     position: relative;
 }
 
@@ -1443,35 +1449,59 @@ body {
 }
 /* --- Footer --- */
 .footer {
-    padding: 50px 0;
+    width: 100%;
+    padding: 25px 0;
     text-align: center;
-    border-top: 1px solid rgba(232, 216, 196, 0.1);
+    
+    /* VERTICAL LINEAR GRADIENT */
+    /* top starts at #E8D8C4, bottom ends at #c7a67e */
+    background: linear-gradient(to bottom, #080A0D 0%,#4D666F 50%, #92C1D1 100%);
+    
+    /* Adds a subtle top border to make the transition from the dark section smoother */
+    border-top: 1px solid rgb(26, 26, 26);
 }
+
 
 .footer p {
     font-family: 'Inter', sans-serif;
     font-size: 0.75rem;
-    color: #E8D8C4;
-    opacity: 0.5;
+    color: #ffffff;
+    opacity: 70;
     letter-spacing: 2px;
     text-transform: uppercase;
 }
 
 /* Mobile Adjustments */
 @media (max-width: 768px) {
-    .form-row {
+    .footer-info-container {
         flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 40px;
+    }
+
+    .social-item {
+        justify-content: center; /* Centers the icon and "Discord" text together */
+    }
+
+    .info-column {
+        width: 100%;
     }
 }
 /* --- Optimized Footer & About Alignment --- */
+.footer-info-section {
+    background-color: #080A0D; /* Matches your Hero and About sections */
+    padding: 60px 0;
+}
 .footer-info-container {
     display: flex;
     justify-content: space-between;
+    width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 60px 20px;
+    padding: 40px 20px;
+    gap: 30px;
 }
-
 .about-contact-wrapper {
     display: flex;
     flex-direction: column; /* Stacks items vertically */
@@ -1481,21 +1511,21 @@ body {
 
 .social-item {
     display: flex;
-    align-items: center;    /* Vertically centers icon with text */
+    align-items: center;
     gap: 10px;
     text-decoration: none;
     color: #E8D8C4;
-    font-size: 0.9rem;
-    font-family: 'Inter', sans-serif;
     transition: opacity 0.3s ease;
 }
-
 .social-item:hover {
     opacity: 0.6;
 }
 
 /* --- Responsive Layout --- */
 @media (max-width: 850px) {
+    .footer {
+        padding: 15px 20px;
+    }
     .footer-info-container {
         flex-direction: column;
         align-items: center;
@@ -1515,6 +1545,12 @@ body {
     color: rgba(232, 216, 196, 0.4);
     letter-spacing: 2px;
     margin-bottom: 20px;
+}
+
+.info-column {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .info-column p {
