@@ -813,7 +813,34 @@ body {
         height: 160px;
     }
 }
+/* Container for the button to give it spacing */
+.work-action-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Centers the button */
+    margin-top: 50px;       /* Space between the keyboard/skills and button */
+    padding-bottom: 20px;
+}
 
+/* Ensure the button looks consistent with your resume button */
+.work-action-wrapper .cta-button {
+    padding: 15px 40px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    background-color: transparent;
+    border: 2px solid #E8D8C4;
+    color: #E8D8C4;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.work-action-wrapper .cta-button:hover {
+    background-color: #E8D8C4;
+    color: #1E1E1E;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
 
 /* --- About Section Layers --- */
 .about-section {

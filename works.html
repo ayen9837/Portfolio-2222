@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Works | Warlyn Bagongon</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+
+        .back-button-container {
+    max-width: 1200px;
+    margin: 0 auto 30px auto; /* Reduced bottom margin */
+    padding: 0 5%;
+}
+
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #E8D8C4;
+    text-decoration: none;
+    /* Using your normal body font */
+    font-family: 'Inter', sans-serif; 
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    padding: 8px 16px;
+    border: 1px solid rgba(232, 216, 196, 0.2);
+    border-radius: 4px; /* Sharper, cleaner corners */
+    transition: all 0.2s ease;
+}
+
+.back-button svg {
+    opacity: 0.8;
+}
+
+.back-button:hover {
+    background: rgba(232, 216, 196, 0.05);
+    border-color: rgba(232, 216, 196, 0.5);
+    color: #ffffff;
+}
+
+.back-button:hover svg {
+    opacity: 1;
+}
+
+/* Ensure the grid doesn't feel too far away on mobile */
+@media (max-width: 768px) {
+    .works-page-container {
+        padding-top: 100px;
+    }
+}
+    /* --- Desktop/Laptop Settings --- */
+.back-button-container {
+    max-width: 1200px;
+    margin: 0 auto 30px auto;
+    padding: 0 5%;
+}
+
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #E8D8C4;
+    text-decoration: none;
+    font-family: 'Inter', sans-serif; 
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    padding: 8px 16px;
+    border: 1px solid rgba(232, 216, 196, 0.2);
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+/* THE GRID: Forces 2 columns side-by-side */
+.works-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 15px; 
+    max-width: 1200px;
+    margin: 0 auto 40px auto;
+    padding: 0 5%;
+    align-items: start; 
+}
+
+/* PORTRAIT / REELS SIZE: Normal size on laptop */
+.work-box.portrait .video-container {
+    aspect-ratio: 9 / 16;
+    width: 100%;
+    max-width: 280px; 
+    margin: 0 auto;   
+    background: #000;
+}
+
+/* LANDSCAPE / YOUTUBE SIZE: Normal size on laptop */
+.work-box.landscape .video-container {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    max-width: 450px; 
+    margin: 0 auto;   
+    background: #000;
+}
+
+/* BOX STYLES */
+.work-box {
+    background: #141414;
+    border: 1px solid rgba(232, 216, 196, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.video-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* --- MOBILE RESPONSIVE (The "Red Draw" Look) --- */
+@media (max-width: 768px) {
+    .works-page-container {
+        padding-top: 100px;
+    }
+
+    /* Keep Reels in 2 columns with slight padding */
+    .works-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        padding: 0 10px;
+    }
+
+    /* Target the YouTube/Landscape grid to hit the screen edges */
+    .works-grid:has(.landscape) {
+        padding: 0 !important; /* Removes side padding from the grid */
+        gap: 0 !important;     /* Removes gap between the two videos */
+        width: 100vw;          /* Forces full screen width */
+    }
+
+    .work-box.landscape {
+        border-radius: 0;      /* Sharp edges to match screen sides */
+        border: none;          /* Clean look for full-width */
+    }
+
+    .work-box.landscape .video-container {
+        max-width: 100% !important; /* Stretches video to touch the sides */
+    }
+
+    .work-details h3 { font-size: 10px; }
+    .work-details p { font-size: 8px; }
+}
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Warlyn</div>
+            <button class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="index.html#about">About Me</a></li>
+                <li><a href="index.html#skills">Skills</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="index.html#contacts">Contacts</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="works-page-container">
+    <div class="back-button-container">
+        <a href="index.html" class="back-button">
+            Back to Home
+        </a>
+    </div>
+
+    <div class="works-grid">
+        <div class="work-box portrait">
+            <div class="video-container">
+                <video loop onmouseover="this.play(); this.muted=false" onmouseout="this.pause(); this.muted=true">
+                    <source src="videos/Sample.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="work-details">
+                <h3>REEL TITLE</h3>
+                <p>9:16 VERTICAL</p>
+            </div>
+        </div>
+        <div class="work-box portrait">
+            <div class="video-container">
+                <video muted loop onmouseover="this.play()" onmouseout="this.pause()">
+                    <source src="videos/Reel2.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="work-details">
+                <h3>REEL TITLE</h3>
+                <p>9:16 VERTICAL</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="works-grid">
+        <div class="work-box landscape">
+            <div class="video-container">
+                <video muted loop onmouseover="this.play()" onmouseout="this.pause()">
+                    <source src="videos/Sample.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="work-details">
+                <h3>YOUTUBE TITLE</h3>
+                <p>16:9 LANDSCAPE</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script>
+        const menuToggle = document.getElementById('mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+    </script>
+
+</body>
+</html>
