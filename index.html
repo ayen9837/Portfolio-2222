@@ -182,9 +182,15 @@
             </div>
         </div>
     </div>
-    <div class="work-action-wrapper reveal">
-            <a href="works.html" class="cta-button">SOME WORKS</a>
-        </div>
+    <div class="work-action-wrapper reveal" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+    <div id="arrow-left-root"></div>
+
+    <a href="works.html" class="cta-button">
+        SOME WORKS
+    </a>
+
+    <div id="arrow-right-root"></div>
+</div>
 </div>
 </section>
 
@@ -663,6 +669,55 @@ document.getElementById('contactForm').addEventListener('submit', async function
         const root = ReactDOM.createRoot(container);
         root.render(<SkillsKeyboard />);
     }
+
+    const Arrow = ({ direction }) => {
+    const isLeft = direction === 'left';
+    return (
+        <motion.div 
+            style={{
+                display: 'inline-block',
+                color: '#E8D8C4',
+                margin: isLeft ? '0 10px 0 0' : '0 0 0 10px',
+                verticalAlign: 'middle'
+            }}
+            // Left arrow moves right, Right arrow moves left
+            animate={{ 
+                x: isLeft ? [0, 8, 0] : [0, -8, 0], 
+            }}
+            transition={{ 
+                duration: 1.5, 
+                repeat: Infinity, 
+                ease: "easeInOut" 
+            }}
+        >
+            <svg 
+                width="30" 
+                height="24" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2.5" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                // Left arrow is not rotated (default points right), 
+                // Right arrow is rotated 180deg (points left)
+                style={{ transform: isLeft ? 'none' : 'rotate(180deg)' }}
+            >
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+        </motion.div>
+    );
+};
+
+// Render both arrows into their respective roots
+const leftRoot = document.getElementById('arrow-left-root');
+const rightRoot = document.getElementById('arrow-right-root');
+
+if (leftRoot) ReactDOM.createRoot(leftRoot).render(<Arrow direction="left" />);
+if (rightRoot) ReactDOM.createRoot(rightRoot).render(<Arrow direction="right" />);
+
+
 </script>
 </body>
 
