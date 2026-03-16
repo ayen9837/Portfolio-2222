@@ -12,43 +12,20 @@
     <link rel="icon" type="image/x-icon" href="pictures/Thumbnail.png">
 
     <style>
-
-        .back-button-container {
-    max-width: 1200px;
-    margin: 0 auto 30px auto; /* Reduced bottom margin */
-    padding: 0 5%;
-}
-
-.back-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    color: #E8D8C4;
+        .logo a {
     text-decoration: none;
-    /* Using your normal body font */
-    font-family: 'Inter', sans-serif; 
-    font-size: 14px;
-    font-weight: 400;
-    letter-spacing: 0.5px;
-    padding: 8px 16px;
-    border: 1px solid rgba(232, 216, 196, 0.2);
-    border-radius: 4px; /* Sharper, cleaner corners */
-    transition: all 0.2s ease;
+    color: inherit; /* Keeps the color you already set for .logo */
+    display: block;  /* Makes the whole area clickable */
 }
 
-.back-button svg {
-    opacity: 0.8;
+.logo a:hover {
+    opacity: 0.8;   /* Optional: gives a slight fade when you hover over it */
+    cursor: pointer;
 }
 
-.back-button:hover {
-    background: rgba(232, 216, 196, 0.05);
-    border-color: rgba(232, 216, 196, 0.5);
-    color: #ffffff;
-}
-
-.back-button:hover svg {
-    opacity: 1;
-}
+.works-page-container {
+    padding-top: 40px; /* Adjust this value as needed */
+}   
 
 /* Ensure the grid doesn't feel too far away on mobile */
 @media (max-width: 768px) {
@@ -57,27 +34,7 @@
     }
 }
     /* --- Desktop/Laptop Settings --- */
-.back-button-container {
-    max-width: 1200px;
-    margin: 0 auto 30px auto;
-    padding: 0 5%;
-}
 
-.back-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    color: #E8D8C4;
-    text-decoration: none;
-    font-family: 'Inter', sans-serif; 
-    font-size: 14px;
-    font-weight: 400;
-    letter-spacing: 0.5px;
-    padding: 8px 16px;
-    border: 1px solid rgba(232, 216, 196, 0.2);
-    border-radius: 4px;
-    transition: all 0.2s ease;
-}
 
 /* THE GRID: Forces 2 columns side-by-side */
 .works-grid {
@@ -90,14 +47,49 @@
     align-items: start; 
 }
 
+
 /* PORTRAIT / REELS SIZE: Normal size on laptop */
 .work-box.portrait .video-container {
-    aspect-ratio: 9 / 16;
     width: 100%;
-    max-width: 280px; 
-    margin: 0 auto;   
-    background: #000;
+    max-width: 320px;
+    /* We use height: calc to ensure the 9:16 ratio is physically 
+       there so the video has space to be centered vertically */
+    height: auto;
+    aspect-ratio: 9 / 16;
+    
+    background-color: #000; 
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    
+    /* This centers the black box itself in the middle of your screen/grid */
+    margin: 0 auto; 
+
+    /* Force Flexbox centering */
+    display: flex !important;
+    justify-content: center !important; /* Horizontal */
+    align-items: center !important;     /* Vertical */
 }
+
+.work-box.portrait .video-container video {
+    /* Square video logic */
+    width: auto; 
+    height: auto;
+    
+    /* This keeps it from stretching while staying centered */
+    max-width: 100%;
+    max-height: 100%;
+    
+    display: block;
+    object-fit: contain;
+}
+
+/* Ensure the text under the video also stays centered on laptop */
+.work-box.portrait .work-details {
+    text-align: center;
+    width: 100%;
+}
+
 
 /* LANDSCAPE / YOUTUBE SIZE: Normal size on laptop */
 .work-box.landscape .video-container {
@@ -119,70 +111,152 @@
 
 .video-container video {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;        /* Allows the video to set its own height based on original export */
     display: block;
+    object-fit: contain;   /* Ensures no part of your edit is cropped */
+    border-radius: 12px;   /* Optional: keeps the rounded corners you have elsewhere */
+}
+.work-details {
+    margin-top: 15px;
+    text-align: center; /* This centers the H3 and the P tag */
+    width: 100%;       /* Ensures it takes up the full width of the video box */
+}
+
+.work-details h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.2rem;
+    color: #E8D8C4;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.work-details p {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    color: #a0a0a0; /* Slightly dimmed for better hierarchy */
+    font-weight: 300;
 }
 
 /* --- MOBILE RESPONSIVE (The "Red Draw" Look) --- */
+/* --- MOBILE RESPONSIVE --- */
 @media (max-width: 768px) {
     .works-page-container {
         padding-top: 100px;
     }
 
-    /* Keep Reels in 2 columns with slight padding */
     .works-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-        padding: 0 10px;
+        grid-template-columns: 1fr; 
+        gap: 20px;
+        padding: 0 20px;
     }
 
-    /* Target the YouTube/Landscape grid to hit the screen edges */
+    .works-grid:has(.portrait) {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
     .works-grid:has(.landscape) {
-        padding: 0 !important; /* Removes side padding from the grid */
-        gap: 0 !important;     /* Removes gap between the two videos */
-        width: 100vw;          /* Forces full screen width */
+        grid-template-columns: 1fr !important;
+        padding: 0 !important; 
+        gap: 30px !important;
+        width: 100vw;
     }
 
     .work-box.landscape {
-        border-radius: 0;      /* Sharp edges to match screen sides */
-        border: none;          /* Clean look for full-width */
+        border-radius: 0;
+        border: none;
     }
 
     .work-box.landscape .video-container {
-        max-width: 100% !important; /* Stretches video to touch the sides */
+        max-width: 100% !important;
     }
 
-    .work-details h3 { font-size: 10px; }
-    .work-details p { font-size: 8px; }
+    /* FIX FOR FONT SIZES: Forces them to regular size when stacked */
+    .work-box.landscape .work-details h3 {
+        font-size: 1.1rem !important; /* Regular size */
+        margin-top: 10px;
+    }
+
+    .work-box.landscape .work-details p {
+        font-size: 0.85rem !important; /* Regular size */
+        margin-bottom: 15px;
+    }
+}
+
+.grid-separator {
+    margin-top: 80px; /* Adjust this number to increase the gap */
+}
+
+/* Main Section Title - Optimized for all screens */
+.section-main-title {
+    font-family: 'Akira Expanded', sans-serif;
+    font-size: 1.8rem; /* Reduced from 2rem for a cleaner look */
+    color: #E8D8C4;
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 5px; /* Tight gap to the subtitle */
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* Subtitle (1M Views) */
+.section-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem; 
+    color: #a0a0a0; /* Subtle grey */
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+/* Responsive Scaling for Mobile */
+@media (max-width: 768px) {
+    .section-main-title {
+        font-size: 1rem; /* "Regular" size for mobile */
+        margin-top: 40px;
+    }
+    
+    .section-subtitle {
+        font-size: 0.9rem;
+    }
+}
+
+/* Adjust size for mobile screens */
+@media (max-width: 768px) {
+    .section-main-title {
+        font-size: 1.5rem;
+        margin-top: 50px;
+        margin-bottom: 25px;
+    }
 }
     </style>
 </head>
 <body>
 
     <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">Warlyn</div>
-            <button class="menu-toggle" id="mobile-menu">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </button>
-            <ul class="nav-links">
-                <li><a href="index.html#about">About Me</a></li>
-                <li><a href="index.html#skills">Skills</a></li>
-                <li><a href="index.html#projects">Projects</a></li>
-                <li><a href="index.html#contacts">Contacts</a></li>
-            </ul>
+    <div class="nav-container">
+        <div class="logo">
+            <a href="index.html" style="text-decoration: none; color: inherit;">Warlyn</a>
         </div>
-    </nav>
+        
+        <button class="menu-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+        <ul class="nav-links">
+            <li><a href="index.html#about">About Me</a></li>
+            <li><a href="index.html#skills">Skills</a></li>
+            <li><a href="index.html#projects">Projects</a></li>
+            <li><a href="index.html#contacts">Contacts</a></li>
+        </ul>
+    </div>
+</nav>
 
     <div class="works-page-container">
-    <div class="back-button-container">
-        <a href="index.html" class="back-button">
-            Back to Home
-        </a>
-    </div>
+    
 
     <div class="works-grid">
         <div class="work-box portrait">
@@ -193,7 +267,7 @@
             </div>
             <div class="work-details">
                 <h3>Tiktok Shorts</h3>
-                <p>9:16 VERTICAL</p>
+                <p>Sample</p>
             </div>
         </div>
         <div class="work-box portrait">
@@ -204,24 +278,65 @@
             </div>
             <div class="work-details">
                 <h3>Podcast Shorts</h3>
-                <p>9:16 VERTICAL</p>
+                <p>Talking Heads</p>
             </div>
         </div>
     </div>
 
-    <div class="works-grid">
-        <div class="work-box landscape">
-            <div class="video-container">
-                <video muted loop onmouseover="this.play()" onmouseout="this.pause()">
-                    <source src="videos/Wedding Invitation_2.mp4" type="video/mp4">
-                </video>
-            </div>
-            <div class="work-details">
-                <h3>3D Motion Wedding Invitation</h3>
-                <p>16:9 LANDSCAPE</p>
-            </div>
+    <div class="works-grid landscape-grid-dual">
+    <div class="work-box landscape">
+        <div class="video-container">
+            <video muted loop onmouseover="this.play()" onmouseout="this.pause()">
+                <source src="videos/Wedding Invitation_2.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="work-details">
+            <h3>Wedding Invitation</h3>
+            <p>3D Motion Graphics</p>
         </div>
     </div>
+
+    <div class="work-box landscape">
+        <div class="video-container">
+            <video muted loop onmouseover="this.play()" onmouseout="this.pause()">
+                <source src="videos/Trailer.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="work-details">
+            <h3>Trailer</h3>
+            <p>Film Project</p>
+        </div>
+    </div>
+</div>
+<h2 class="section-main-title">Tiktok Edits</h2>
+<p class="section-subtitle">1M Views</p>
+    
+
+<div class="works-grid">
+    <div class="work-box portrait">
+        <div class="video-container">
+            <video muted loop onmouseover="this.play()" onmouseout="this.pause()">
+                <source src="videos/Percy Jackson.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="work-details">
+            <h3>Percy Jackson</h3>
+            <p>1.8 views</p>
+        </div>
+    </div>
+
+    <div class="work-box portrait">
+        <div class="video-container">
+            <video muted loop onmouseover="this.play()" onmouseout="this.pause()">
+                <source src="videos/Marvel.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="work-details">
+            <h3>Hela & Loki [Marvel]</h3>
+            <p>1.1m views</p>
+        </div>
+    </div>
+</div>
     
 </div>
 
