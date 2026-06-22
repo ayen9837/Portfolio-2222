@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warlyn Bagongon - Motion Designer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+    
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/framer-motion@11.11.17/dist/framer-motion.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        /* This ensures the React Spark component covers the entire background of the hero */
+        #hero-spark-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1; /* Sits behind the text content */
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2; /* Sits above the spark effect */
+            pointer-events: none; /* Let clicks pass through to the spark layer */
+        }
+
+        .cta-button {
+            pointer-events: auto; /* Re-enable clicks specifically for the button */
+        }
+    </style>
+</head>
+
+<body>
+<div class="video-popup-overlay" id="videoPopup">
+        <div class="popup-video-container">
+            <video id="popupVideo" loop muted playsinline></video>
+        </div>
+    </div>
+</div>
+
+    
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Warlyn</div>
+            <button class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contacts">Contacts</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+    <div id="hero-spark-container"></div>
+    
+    <div class="hero-container">
+        <div class="hero-content hero-text-side">
+            <h1 class="hero-title">Hello! I'm Warlyn <br> Bagongon</h1>
+            <p class="hero-subtitle">Video Editor, Motion Designer, and Programmer specializing in creative and technical projects.</p>
+            <a href="files/Warlyn Bagongon Resum2e.pdf" target="_blank" class="cta-button">No Available Resume</a>
+        </div>
+
+        <div class="hero-image-side">
+            <div class="profile-circle">
+                <img src="pictures/profile pic.jpg" alt="Warlyn Bagongon">
+            </div>
+        </div>
+    </div> <div class="wave-divider">
+        <svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+            <path fill="#c7a67e" d="M0,160L60,170.7C120,181,240,203,360,213.3C480,224,600,224,720,213.3C840,203,960,181,1080,176C1200,171,1320,181,1380,186.7L1440,192L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
+            <path fill="#E8D8C4" d="M0,224L60,234.7C120,245,240,267,360,261.3C480,256,600,224,720,218.7C840,213,960,235,1080,245.3C1200,256,1320,256,1380,256L1440,256L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
+        </svg>
+    </div>
+</section>
+
+    <section id="skills" class="skills-section">
+    <div class="skills-container">
+        
+        <div class="skills-list-wrapper">
+            <div class="skills-bg-text reveal reveal-left">Skills</div>
+            
+            <div class="skills-group upper reveal reveal-right">
+                <p>Motion Graphic & Design</p>
+                <p>Visual Effects</p>
+            </div>
+            
+            <div class="skills-group lower reveal reveal-right">
+    <p>UI/UX Design</p>
+    <p>Technical Support</p>
+    <p>Programmer</p>
+</div>
+        </div>
+
+        <div id="skills-keyboard-root"></div>
+        
+    </div>
+</section>
+
+    <section id="projects" class="works-section">
+    <h2 class="works-title reveal">WORKS</h2>
+
+    <div class="works-slider-container">
+    <div class="works-row">
+        <div class="category-label">Kinetic <br> Typography</div>
+        <div class="slider-track">
+            <div class="slider-content">
+    <div class="project-box"><video autoplay muted loop playsinline src="videos/thin and bold.mp4"></video></div>
+    <div class="project-box"><video autoplay muted loop playsinline src="videos/mesh warp txt.mp4"></video></div>
+    <div class="project-box"><video autoplay muted loop playsinline src="videos/glitch text with gradient bg.mp4"></video></div>
+    <div class="project-box"><video autoplay muted loop playsinline src="videos/stretch kinetic typography.mp4"></video></div>
+    <div class="project-box"><video autoplay muted loop playsinline src="videos/heatmap.mp4"></video></div>
+    <div class="project-box"><video autoplay muted loop playsinline src="videos/texture.mp4"></video></div>
+    <div class="project-box"><video autoplay muted loop playsinline src="videos/twirl.mp4"></video></div>
+    <div class="project-box"><video autoplay muted loop playsinline src="videos/swirly TXT.mp4"></video></div>
+
+    <div class="project-box"><video autoplay muted loop playsinline src="videos/thin and bold.mp4"></video></div>
+    <div class="project-box"><video autoplay muted loop playsinline src="videos/mesh warp txt.mp4"></video></div>
+    <div class="project-box"><video autoplay muted loop playsinline src="videos/glitch text with gradient bg.mp4"></video></div>
+    <div class="project-box"><video autoplay muted loop playsinline src="videos/stretch kinetic typography.mp4"></video></div>
+    <div class="project-box"><video autoplay muted loop playsinline src="videos/heatmap.mp4"></video></div>
+    <div class="project-box"><video autoplay muted loop playsinline src="videos/texture.mp4"></video></div>
+    <div class="project-box"><video autoplay muted loop playsinline src="videos/twirl.mp4"></video></div>
+    <div class="project-box"><video autoplay muted loop playsinline src="videos/swirly TXT.mp4"></video></div>
+</div>
+        </div>
+    </div>
+
+    <div class="works-row">
+        <div class="category-label">Motion <br> Graphics</div>
+        <div class="slider-track reverse"> 
+            <div class="slider-content">
+                <div class="project-box"><video autoplay muted loop playsinline src="videos/dimentional loop.mp4"></video></div>
+                <div class="project-box"><video autoplay muted loop playsinline src="videos/Cube.mp4"></video></div>
+                <div class="project-box"><video autoplay muted loop playsinline src="videos/Motion Circle.mp4"></video></div>
+                <div class="project-box"><video autoplay muted loop playsinline src="videos/Click.mp4"></video></div>
+                <div class="project-box"><video autoplay muted loop playsinline src="videos/carouselx.mp4"></video></div>
+                <div class="project-box"><video autoplay muted loop playsinline src="videos/video3.mp4"></video></div>
+
+                <div class="project-box"><video autoplay muted loop playsinline src="videos/dimentional loop.mp4"></video></div>
+                <div class="project-box"><video autoplay muted loop playsinline src="videos/Cube.mp4"></video></div>
+                <div class="project-box"><video autoplay muted loop playsinline src="videos/Motion Circle.mp4"></video></div>
+                <div class="project-box"><video autoplay muted loop playsinline src="videos/Click.mp4"></video></div>
+                <div class="project-box"><video autoplay muted loop playsinline src="videos/carouselx.mp4"></video></div>
+                <div class="project-box"><video autoplay muted loop playsinline src="videos/video3.mp4"></video></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="works-row">
+        <div class="category-label">Text <br> Animation</div>
+        <div class="slider-track">
+            <div class="slider-content">
+                <div class="project-box"><video autoplay muted loop playsinline src="videos/Bounce Animation.mp4"></video></div>
+                <div class="project-box"><video autoplay muted loop playsinline src="videos/spin animation.mp4"></video></div>
+                <div class="project-box"><video autoplay muted loop playsinline src="videos/Masked rise.mp4"></video></div>
+                <div class="project-box"><video autoplay muted loop playsinline src="videos/echo.mp4"></video></div>
+                <div class="project-box"><video autoplay muted loop playsinline src="videos/video2.mp4"></video></div>
+                <div class="project-box"><video autoplay muted loop playsinline src="videos/video3.mp4"></video></div>
+
+                <div class="project-box"><video autoplay muted loop playsinline src="videos/Bounce Animation.mp4"></video></div>
+                <div class="project-box"><video autoplay muted loop playsinline src="videos/spin animation.mp4"></video></div>
+                <div class="project-box"><video autoplay muted loop playsinline src="videos/Masked rise.mp4"></video></div>
+                <div class="project-box"><video autoplay muted loop playsinline src="videos/echo.mp4"></video></div>
+                <div class="project-box"><video autoplay muted loop playsinline src="videos/video2.mp4"></video></div>
+                <div class="project-box"><video autoplay muted loop playsinline src="videos/video3.mp4"></video></div>
+            </div>
+        </div>
+    </div>
+    <div class="work-action-wrapper reveal" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+    <div id="arrow-left-root"></div>
+
+    <a href="works.html" class="cta-button">
+        SOME WORKS
+    </a>
+
+    <div id="arrow-right-root"></div>
+</div>
+</div>
+</section>
+
+    <section id="about" class="about-section">
+    <div class="about-container">
+        <h2 class="section-title reveal">ABOUT</h2>
+
+        <div class="about-layers">
+            <div class="about-card layer-1">
+                <span class="card-label"> </span>
+                <p class="about-intro">I'm Warlyn, a 22 years old motion designer and TikTok content creator with 19K followers, specializing in high-end edits with a modern, high-impact aesthetic. I am also a programmer with basic IT skills, combining creativity with technical knowledge.</p>
+            </div>
+
+            <div class="about-card layer-2">
+    <span class="card-label">EDUCATION</span>
+    <div class="card-content">
+        <div class="exp-meta">
+            <h3 class="program">BS in Information Technology</h3>
+            <span class="year">2021 — 2025</span>
+        </div>
+        <p class="info">Focused on technical QA, documenting defects and verifying system stability.</p>
+    </div>
+</div>
+
+            <div class="about-card layer-3">
+    <span class="card-label">EXPERIENCE</span>
+    
+    <div class="experience-list">
+        <div class="exp-bullet-item">
+            <div class="exp-bullet-marker"></div> <div class="exp-content">
+                <div class="exp-meta">
+                    <h4 class="exp-type">Internship</h4>
+                    <span class="exp-year">2024 — 2025</span>
+                </div>
+                <p class="exp-title">EVERGREEN - QUALITY ASSURANCE</p>
+                <p class="exp-description">Supported operational success through creative design, efficient project management, and meticulous technical quality assurance.</p>
+            </div>
+        </div>
+
+        <div class="exp-bullet-item">
+            <div class="exp-bullet-marker"></div> <div class="exp-content">
+                <div class="exp-meta">
+                    <h4 class="exp-type">Freelance</h4>
+                    <span class="exp-year">2024 — PRESENT</span>
+                </div>
+                <p class="exp-title">Motion Graphic Editor</p>
+                <p class="exp-description">Produced custom 3D birthday and wedding invitation videos using Adobe After Effects.</p>
+            </div>
+        </div>
+    </div>
+</div>
+        </div>
+    </div>
+</section>
+
+   <section id="contacts" class="contacts-section">
+    <div class="contacts-container">
+        <h2 class="section-title reveal">GET IN TOUCH</h2>
+        
+        <div class="contact-frame-wrapper">
+            <div class="contact-side-box sidebar-info">
+    <ul class="contact-list">
+    <li>
+        <a href="mailto:warlynbagongon13@gmail.com" class="contact-link-wrapper">
+            <div class="contact-item-header">
+                <svg class="contact-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <span class="label">EMAIL</span>
+            </div>
+            <span class="value">warlynbagongon13@gmail.com</span>
+        </a>
+    </li>
+
+    <li>
+        <a href="tel:+639198085372" class="contact-link-wrapper">
+            <div class="contact-item-header">
+                <svg class="contact-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <span class="label">PHONE</span>
+            </div>
+            <span class="value">+63 919 808 5372</span>
+        </a>
+    </li>
+
+    <li>
+        <div class="contact-link-wrapper no-hover">
+            <div class="contact-item-header">
+                <svg class="contact-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span class="label">LOCATION</span>
+            </div>
+            <span class="value">Philippines, San Jose Del Monte Bulacan</span>
+        </div>
+    </li>
+</ul>
+</div>
+
+            <div class="contact-side-box main-form">
+                <form action="https://formspree.io/f/mgoovvjy" method="POST" id="contactForm" class="contact-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">NAME</label>
+                            <input type="text" id="name" name="name" placeholder="ex: Joe Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">EMAIL</label>
+                            <input type="email" id="email" name="email" placeholder="email@example.com" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">SUBJECT</label>
+                        <input type="text" id="subject" name="subject" placeholder="What is this about?" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">MESSAGE</label>
+                        <textarea id="message" name="message" rows="5" placeholder="Write your message here..." required></textarea>
+                    </div>
+                    <button type="submit" class="cta-button">SEND MESSAGE</button>
+                </form>
+                <div id="successMessage" style="display:none; color: #E8D8C4; font-family: 'Bebas Neue';">
+                    MESSAGE SENT SUCCESSFULLY!
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="footer-info-section">
+    <div class="footer-info-container">
+        
+        <div class="info-column">
+        <h3 class="mini-title">COMMUNITY</h3>
+        <a href="https://discord.gg/3qwxHJFR" target="_blank" class="social-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Z"></path>
+                <circle cx="9" cy="11" r="1"></circle>
+                <circle cx="15" cy="11" r="1"></circle>
+                <path d="M8 15h8"></path>
+            </svg>
+            <span>Discord</span>
+        </a>
+    </div>
+
+        <div class="info-column center-col">
+            <h3 class="mini-title">SOCIAL MEDIA</h3>
+            <div class="social-links-list">
+                <a href="https://www.facebook.com/warlyn.bagongon" target="_blank" class="social-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                    <span>Facebook</span>
+                </a>
+                
+                <a href="https://www.tiktok.com/@hoe4lex?is_from_webapp=1&sender_device=pc" target="_blank" class="social-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
+                    <span>TikTok</span>
+                </a>
+                <a href="https://www.instagram.com/prothemio/" target="_blank" class="social-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path></svg>
+                    <span>Instagram</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="info-column right-col">
+            <h3 class="mini-title">ABOUT</h3>
+            <div class="about-contact-wrapper">
+                <a href="mailto:warlynbagongon13@gmail.com" class="social-item">
+                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                         <polyline points="22,6 12,13 2,6"></polyline>
+                     </svg>
+            <span>Email</span>
+                </a>
+                <a href="files/Warlyn Bagongon Resum2e.pdf" target="_blank" class="social-item">
+             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+             </svg>
+            <span>Resume</span>
+        </a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<footer class="footer">
+    <p>© Warlyn Bagongon 2026 Inc. All rights reserved.</p>
+</footer>
+
+   <script type="text/babel">
+        const { useState, useEffect, useRef, useCallback } = React;
+    const motion = window.Motion ? window.Motion.motion : null;
+
+        // 1. Single Key Item Component (FIXED CLOSING TAG)
+        // 2. NOW DEFINE THE COMPONENTS LOWER DOWN
+    // --- Single Key Item Component ---
+const Key = ({ skill, img, bgColor }) => {
+    return (
+        <div 
+            className="skill-key"
+            style={{ backgroundColor: bgColor || 'rgba(20, 20, 20, 0.6)' }}
+        >
+            {img && <img src={img} alt={skill} className="key-logo" />}
+            <div className="key-label">{skill}</div>
+        </div>
+    );
+};
+
+        // 2. Keyboard Layout Component
+        const Keyboard = () => {
+            const rows = [
+                [
+                    {s:'PR', img: 'logo/premiere pro.png', bgColor: '#00005c'},
+                    {s:'AE', img: 'logo/after effects.png', bgColor: '#00005c'},
+                    {s:'AU', img: 'logo/audition.png', bgColor: '#00005c'},
+                    {s:'CV', img: 'logo/Canva.png', bgColor: '#00c4cc'},
+                    {s:'PS', img: 'logo/Figma.png', bgColor: '#333333'},
+                    {s:'AI', img: 'logo/adobe illustrator.png', bgColor: '#330000'},
+                    {s:'T', img: 'logo/CapCut.png', bgColor: '#ffffff'}
+                ],
+                [
+                    {s:'JS', img: 'logo/javascript.png', bgColor: '#f7df1e'},
+                    {s:'D', img: 'logo/html.png', bgColor: '#e34f26'},
+                    {s:'F', img: 'logo/css.png', bgColor: '#1572b6'}
+                ]
+            ];
+
+            return (
+                <div className="keyboard-container">
+                    {rows.map((row, i) => (
+                        <div key={i} className="keyboard-row">
+                            {row.map((key, index) => (
+                                <Key 
+                                    key={index} 
+                                    skill={key.s} 
+                                    img={key.img} 
+                                    bgColor={key.bgColor} 
+                                />
+                            ))}
+                        </div>
+                    ))}
+                </div>
+            );
+        };
+
+        // 3. Navigation Action Arrows Component
+        const ActionArrow = ({ isLeft }) => {
+            return (
+                <motion.div
+                    style={{
+                        display: 'inline-block',
+                        margin: isLeft ? '0 10px 0 0' : '0 0 0 10px',
+                        verticalAlign: 'middle'
+                    }}
+                    animate={{ 
+                        x: isLeft ? [0, 8, 0] : [0, -8, 0], 
+                    }}
+                    transition={{ 
+                        duration: 1.5, 
+                        repeat: Infinity, 
+                        ease: "easeInOut" 
+                    }}
+                >
+                    <svg 
+                        width="30" 
+                        height="24" 
+                        viewBox="0 0 24 24" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        strokeWidth="2.5" 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round"
+                        style={{ transform: isLeft ? 'none' : 'rotate(180deg)' }}
+                    >
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </motion.div>
+            );
+        };
+
+        // 4. ClickSpark Background Component
+        const ClickSpark = ({
+            sparkColor = '#E8D8C4', 
+            sparkSize = 10,
+            sparkRadius = 15,
+            sparkCount = 8,
+            duration = 400,
+            extraScale = 1.0
+        }) => {
+            const canvasRef = useRef(null);
+            const sparksRef = useRef([]);
+
+            useEffect(() => {
+                const canvas = canvasRef.current;
+                const parent = canvas.parentElement;
+                const resizeCanvas = () => {
+                    canvas.width = parent.clientWidth;
+                    canvas.height = parent.clientHeight;
+                };
+                window.addEventListener('resize', resizeCanvas);
+                resizeCanvas();
+                return () => window.removeEventListener('resize', resizeCanvas);
+            }, []);
+
+            const easeFunc = useCallback(t => t * (2 - t), []);
+
+            useEffect(() => {
+                const canvas = canvasRef.current;
+                const ctx = canvas.getContext('2d');
+                let animationId;
+
+                const draw = (timestamp) => {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    sparksRef.current = sparksRef.current.filter(spark => {
+                        const elapsed = timestamp - spark.startTime;
+                        if (elapsed >= duration) return false;
+
+                        const progress = elapsed / duration;
+                        const eased = easeFunc(progress);
+                        const distance = eased * sparkRadius * extraScale;
+                        const lineLength = sparkSize * (1 - eased);
+
+                        const x1 = spark.x + distance * Math.cos(spark.angle);
+                        const y1 = spark.y + distance * Math.sin(spark.angle);
+                        const x2 = spark.x + (distance + lineLength) * Math.cos(spark.angle);
+                        const y2 = spark.y + (distance + lineLength) * Math.sin(spark.angle);
+
+                        ctx.strokeStyle = sparkColor;
+                        ctx.lineWidth = 2;
+                        ctx.beginPath();
+                        ctx.moveTo(x1, y1);
+                        ctx.lineTo(x2, y2);
+                        ctx.stroke();
+                        return true;
+                    });
+                    animationId = requestAnimationFrame(draw);
+                };
+                animationId = requestAnimationFrame(draw);
+                return () => cancelAnimationFrame(animationId);
+            }, [sparkColor, sparkSize, sparkRadius, duration, extraScale, easeFunc]);
+
+            const handleClick = (e) => {
+                const rect = canvasRef.current.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const now = performance.now();
+                const newSparks = Array.from({ length: sparkCount }, (_, i) => ({
+                    x, y, angle: (2 * Math.PI * i) / sparkCount, startTime: now
+                }));
+                sparksRef.current.push(...newSparks);
+            };
+
+            return (
+                <div onClick={handleClick} style={{ width: '100%', height: '100%', cursor: 'pointer' }}>
+                    <canvas ref={canvasRef} style={{ width: '100%', height: '100%', pointerEvents: 'none' }} />
+                </div>
+            );
+        };
+
+        // =========================================================
+        // 5. DOM MOUNTING EXECUTIONS AT THE VERY BOTTOM
+        // =========================================================
+        const sparkContainer = document.getElementById('hero-spark-container');
+        if (sparkContainer) {
+            ReactDOM.createRoot(sparkContainer).render(<ClickSpark />);
+        }
+
+        const keyboardContainer = document.getElementById('skills-keyboard-root');
+        if (keyboardContainer) {
+            ReactDOM.createRoot(keyboardContainer).render(<Keyboard />);
+        }
+
+        const leftArrowEl = document.getElementById('arrow-left-root');
+        if (leftArrowEl) {
+            ReactDOM.createRoot(leftArrowEl).render(<ActionArrow isLeft={true} />);
+        }
+
+        const rightArrowEl = document.getElementById('arrow-right-root');
+        if (rightArrowEl) {
+            ReactDOM.createRoot(rightArrowEl).render(<ActionArrow isLeft={false} />);
+        }
+    </script>
+
+    <script>
+        const observerOptions = { threshold: 0.2 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+        const menu = document.querySelector('#mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+        menu.addEventListener('click', () => {
+            menu.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+        document.querySelectorAll('.nav-links a').forEach(n => n.addEventListener('click', () => {
+            menu.classList.remove('active');
+            navLinks.classList.remove('active');
+        }));
+    </script>
+   <script>
+document.querySelectorAll('.slider-track').forEach(track => {
+    const content = track.querySelector('.slider-content');
+    const isReverse = track.classList.contains('reverse');
+    const popup = document.getElementById('videoPopup');
+    const pVideo = document.getElementById('popupVideo');
+    
+    let isDown = false;
+    let startX;
+    let x = 0;
+    let speed = 50; 
+    let animationFrame;
+    let lastTime = 0;
+
+    // --- NEW: One-Click Pop-up Logic ---
+    track.querySelectorAll('.project-box').forEach(box => {
+        box.addEventListener('click', () => {
+            const videoSrc = box.querySelector('video').src;
+            pVideo.src = videoSrc;
+            popup.classList.add('active');
+            pVideo.play();
+        });
+    });
+
+    // Close popup when clicking the overlay
+    popup.addEventListener('click', () => {
+        popup.classList.remove('active');
+        pVideo.pause();
+    });
+
+    const step = (timestamp) => {
+        if (!lastTime) lastTime = timestamp;
+        
+        // Pause animation if user is clicking/holding for the pop-up
+        if (popup.classList.contains('active')) {
+            lastTime = timestamp;
+            animationFrame = requestAnimationFrame(step);
+            return;
+        }
+        
+        const deltaTime = (timestamp - lastTime) / 1000;
+        lastTime = timestamp;
+
+        if (!isDown) {
+            const halfWidth = content.offsetWidth / 2;
+
+            if (isReverse) {
+                x += speed * deltaTime;
+                // If moving Right: when it hits 0, jump back to -halfWidth
+                if (x >= 0) x = -halfWidth;
+            } else {
+                x -= speed * deltaTime;
+                // If moving Left: when it hits -halfWidth, jump back to 0
+                if (Math.abs(x) >= halfWidth) x = 0;
+            }
+            
+            content.style.transform = `translateX(${x}px)`;
+        }
+        
+        animationFrame = requestAnimationFrame(step);
+    };
+
+    animationFrame = requestAnimationFrame(step);
+
+    // Simplified Dragging (Removed the Long Press Timer)
+    const startDragging = (e) => {
+        isDown = true;
+        startX = (e.pageX || e.touches[0].pageX) - x;
+    };
+
+    const stopDragging = () => {
+        isDown = false;
+    };
+
+    const move = (e) => {
+        if (!isDown) return;
+        const currentX = (e.pageX || e.touches[0].pageX);
+        x = currentX - startX;
+        
+        const halfWidth = content.offsetWidth / 2;
+        
+        // Prevents the slider from being dragged too far out of bounds
+        if (x > 0) x = -halfWidth;
+        if (x < -halfWidth) x = 0;
+        
+        content.style.transform = `translateX(${x}px)`;
+    };
+
+    track.addEventListener('mousedown', startDragging);
+    track.addEventListener('mouseleave', stopDragging);
+    window.addEventListener('mouseup', stopDragging);
+    track.addEventListener('mousemove', move);
+
+    track.addEventListener('touchstart', startDragging, {passive: true});
+    track.addEventListener('touchend', stopDragging);
+    track.addEventListener('touchmove', move, {passive: true});
+});
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault(); // This stops the "Cannot POST" error
+    
+    const form = e.target;
+    const data = new FormData(form);
+    const successMessage = document.getElementById('successMessage');
+
+    // This part sends the data to the internet
+    try {
+        const response = await fetch(form.action, {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+            form.style.display = 'none';
+            successMessage.style.display = 'block';
+            form.reset();
+        } else {
+            alert("Oops! Make sure you added your Formspree ID to the action attribute.");
+        }
+    } catch (error) {
+        alert("Error: Check your internet connection.");
+    }
+});
+</script>
+<script type="text/babel">
+    const motion = window.Motion ? window.Motion.motion : null;
+
+    // Added 'bgColor' to the component props
+    const Key = ({ skill, img, bgColor }) => (
+        <motion.div 
+            className="skill-key"
+            style={{ backgroundColor: bgColor || '#1a1a1a' }} // Uses the color from data, or defaults to dark grey
+            whileHover={{ y: -5, scale: 1.05, filter: "brightness(1.2)" }}
+            whileTap={{ scale: 0.95 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+        >
+            <img src={img} alt={skill} className="key-logo" />
+        </motion.div>
+    );
+
+    const SkillsKeyboard = () => {
+        if (!window.Motion) return null;
+
+        const rows = [
+            [
+                {s:'AE', img: 'logo/After Effects Logo.png', bgColor: '#00005b'}, // Deep Blue
+                {s:'PR', img: 'logo/Canva.png', bgColor: '#00c4cc'},             // Canva Teal
+                {s:'PS', img: 'logo/Figma.png', bgColor: '#333333'},            // Figma Grey
+                {s:'AI', img: 'logo/adobe illustrator.png', bgColor: '#330000'}, // Dark Maroon
+                {s:'T', img: 'logo/CapCut.png', bgColor: '#ffffff'}              // Black
+            ],
+            [
+                {s:'JS', img: 'logo/javascript.png', bgColor: '#f7df1e'},       // JS Yellow
+                {s:'D', img: 'logo/html.png', bgColor: '#e34f26'},              // HTML Orange
+                {s:'F', img: 'logo/css.png', bgColor: '#1572b6'},               // CSS Blue
+                {s:'FCP', img: 'logo/finalcutprologo.png', bgColor: '#111111'}    // Final Cut Pro Dark Theme
+            ]
+        ];
+
+        return (
+            <div className="keyboard-container">
+                {rows.map((row, i) => (
+                    <div key={i} className="keyboard-row">
+                        {row.map((key, index) => (
+                            <Key 
+                                key={index} 
+                                skill={key.s} 
+                                img={key.img} 
+                                bgColor={key.bgColor} 
+                            />
+                        ))}
+                    </div>
+                ))}
+            </div>
+        );
+    };
+
+    const container = document.getElementById('skills-keyboard-root');
+    if (container) {
+        const root = ReactDOM.createRoot(container);
+        root.render(<SkillsKeyboard />);
+    }
+
+    const Arrow = ({ direction }) => {
+    const isLeft = direction === 'left';
+    return (
+        <motion.div 
+            style={{
+                display: 'inline-block',
+                color: '#E8D8C4',
+                margin: isLeft ? '0 10px 0 0' : '0 0 0 10px',
+                verticalAlign: 'middle'
+            }}
+            // Left arrow moves right, Right arrow moves left
+            animate={{ 
+                x: isLeft ? [0, 8, 0] : [0, -8, 0], 
+            }}
+            transition={{ 
+                duration: 1.5, 
+                repeat: Infinity, 
+                ease: "easeInOut" 
+            }}
+        >
+            <svg 
+                width="30" 
+                height="24" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2.5" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                // Left arrow is not rotated (default points right), 
+                // Right arrow is rotated 180deg (points left)
+                style={{ transform: isLeft ? 'none' : 'rotate(180deg)' }}
+            >
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+        </motion.div>
+    );
+};
+
+// Render both arrows into their respective roots
+const leftRoot = document.getElementById('arrow-left-root');
+const rightRoot = document.getElementById('arrow-right-root');
+
+if (leftRoot) ReactDOM.createRoot(leftRoot).render(<Arrow direction="left" />);
+if (rightRoot) ReactDOM.createRoot(rightRoot).render(<Arrow direction="right" />);
+
+
+</script>
+</body>
+
+
+</html>
