@@ -44,7 +44,7 @@
             <video id="popupVideo" loop muted playsinline></video>
         </div>
     </div>
-</div>
+
 
     
     <nav class="navbar">
@@ -71,7 +71,7 @@
         <div class="hero-content hero-text-side">
             <h1 class="hero-title">Hello! I'm Warlyn <br> Bagongon</h1>
             <p class="hero-subtitle">Video Editor, Motion Designer, and Programmer specializing in creative and technical projects.</p>
-            <a href="files/Warlyn Bagongon Resum2e.pdf" target="_blank" class="cta-button">No Available Resume</a>
+            <a href="files/Warlyn Bagongon Resume.pdf" target="_blank" class="cta-button">No Available Resume</a>
         </div>
 
         <div class="hero-image-side">
@@ -99,10 +99,10 @@
             </div>
             
             <div class="skills-group lower reveal reveal-right">
-    <p>UI/UX Design</p>
-    <p>Technical Support</p>
-    <p>Programmer</p>
-</div>
+                <p>UI/UX Design</p>
+                <p>Technical Support</p>
+                <p>Programmer</p>
+            </div>
         </div>
 
         <div id="skills-keyboard-root"></div>
@@ -358,7 +358,7 @@
                      </svg>
             <span>Email</span>
                 </a>
-                <a href="files/Warlyn Bagongon Resum2e.pdf" target="_blank" class="social-item">
+                <a href="files/Warlyn Bagongon Resume.pdf" target="_blank" class="social-item">
              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                 <polyline points="14 2 14 8 20 8"></polyline>
@@ -376,202 +376,123 @@
 <footer class="footer">
     <p>© Warlyn Bagongon 2026 Inc. All rights reserved.</p>
 </footer>
+<script type="text/babel">
+    const { useState, useEffect, useRef, useCallback } = React;
+    const motion = window.FramerMotion ? window.FramerMotion.motion : null;
 
-   <script type="text/babel">
-        const { useState, useEffect, useRef, useCallback } = React;
-    const motion = window.Motion ? window.Motion.motion : null;
-
-        // 1. Single Key Item Component (FIXED CLOSING TAG)
-        // 2. NOW DEFINE THE COMPONENTS LOWER DOWN
-    // --- Single Key Item Component ---
+   <!-- Replace your existing Key component inside the <script type="text/babel"> block -->
 const Key = ({ skill, img, bgColor }) => {
+    const [imgError, setImgError] = React.useState(false);
+    
     return (
         <div 
             className="skill-key"
-            style={{ backgroundColor: bgColor || 'rgba(20, 20, 20, 0.6)' }}
+            title={skill}
+            style={{ 
+                backgroundColor: bgColor || 'rgba(20, 20, 20, 0.6)',
+                transition: 'all 0.2s ease-in-out'
+            }}
         >
-            {img && <img src={img} alt={skill} className="key-logo" />}
+            {img && !imgError 
+                ? <img 
+                    src={img} 
+                    alt={skill} 
+                    className="key-logo"
+                    onError={() => setImgError(true)}
+                  />
+                : <div style={{
+                    fontSize: 'clamp(10px, 1.5vw, 14px)',
+                    fontFamily: 'Akira Expanded, sans-serif',
+                    color: bgColor === '#ffffff' || bgColor === '#f7df1e' ? '#000' : '#E8D8C4',
+                    textAlign: 'center'
+                  }}>{skill}</div>
+            }
             <div className="key-label">{skill}</div>
         </div>
     );
 };
 
-        // 2. Keyboard Layout Component
-        const Keyboard = () => {
-            const rows = [
-                [
-                    {s:'PR', img: 'logo/premiere pro.png', bgColor: '#00005c'},
-                    {s:'AE', img: 'logo/after effects.png', bgColor: '#00005c'},
-                    {s:'AU', img: 'logo/audition.png', bgColor: '#00005c'},
-                    {s:'CV', img: 'logo/Canva.png', bgColor: '#00c4cc'},
-                    {s:'PS', img: 'logo/Figma.png', bgColor: '#333333'},
-                    {s:'AI', img: 'logo/adobe illustrator.png', bgColor: '#330000'},
-                    {s:'T', img: 'logo/CapCut.png', bgColor: '#ffffff'}
-                ],
-                [
-                    {s:'JS', img: 'logo/javascript.png', bgColor: '#f7df1e'},
-                    {s:'D', img: 'logo/html.png', bgColor: '#e34f26'},
-                    {s:'F', img: 'logo/css.png', bgColor: '#1572b6'}
-                ]
-            ];
+    const SkillsKeyboard = () => {
+        const rows = [
+            [
+                {s:'AE', img: 'logo/After Effects Logo.png', bgColor: '#00005b'}, 
+                {s:'PR', img: 'logo/Canva.png', bgColor: '#00c4cc'},             
+                {s:'PS', img: 'logo/Figma.png', bgColor: '#333333'},            
+                {s:'AI', img: 'logo/adobe illustrator.png', bgColor: '#330000'}, 
+                {s:'T', img: 'logo/CapCut.png', bgColor: '#ffffff'}              
+            ],
+            [
+                {s:'JS', img: 'logo/javascript.png', bgColor: '#f7df1e'},       
+                {s:'D', img: 'logo/html.png', bgColor: '#e34f26'},              
+                {s:'F', img: 'logo/css.png', bgColor: '#1572b6'},               
+                {s:'FCP', img: 'logo/finalcutprologo.png', bgColor: '#111111'}    
+            ]
+        ];
 
-            return (
-                <div className="keyboard-container">
-                    {rows.map((row, i) => (
-                        <div key={i} className="keyboard-row">
-                            {row.map((key, index) => (
-                                <Key 
-                                    key={index} 
-                                    skill={key.s} 
-                                    img={key.img} 
-                                    bgColor={key.bgColor} 
-                                />
-                            ))}
-                        </div>
-                    ))}
-                </div>
-            );
+        return (
+            <div className="keyboard-container">
+                {rows.map((row, i) => (
+                    <div key={i} className="keyboard-row">
+                        {row.map((key, index) => (
+                            <Key 
+                                key={index} 
+                                skill={key.s} 
+                                img={key.img} 
+                                bgColor={key.bgColor} 
+                            />
+                        ))}
+                    </div>
+                ))}
+            </div>
+        );
+    };
+
+    const Arrow = ({ direction }) => {
+        const isLeft = direction === 'left';
+        const style = {
+            display: 'inline-block',
+            color: '#E8D8C4',
+            margin: isLeft ? '0 10px 0 0' : '0 0 0 10px',
+            verticalAlign: 'middle'
         };
 
-        // 3. Navigation Action Arrows Component
-        const ActionArrow = ({ isLeft }) => {
+        const arrowSvg = (
+            <svg width="30" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ transform: isLeft ? 'none' : 'rotate(180deg)' }}>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+        );
+
+        if (motion) {
             return (
-                <motion.div
-                    style={{
-                        display: 'inline-block',
-                        margin: isLeft ? '0 10px 0 0' : '0 0 0 10px',
-                        verticalAlign: 'middle'
-                    }}
-                    animate={{ 
-                        x: isLeft ? [0, 8, 0] : [0, -8, 0], 
-                    }}
-                    transition={{ 
-                        duration: 1.5, 
-                        repeat: Infinity, 
-                        ease: "easeInOut" 
-                    }}
+                <motion.div 
+                    style={style} 
+                    animate={{ x: isLeft ? [0, 8, 0] : [0, -8, 0] }} 
+                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
                 >
-                    <svg 
-                        width="30" 
-                        height="24" 
-                        viewBox="0 0 24 24" 
-                        fill="none" 
-                        stroke="currentColor" 
-                        strokeWidth="2.5" 
-                        strokeLinecap="round" 
-                        strokeLinejoin="round"
-                        style={{ transform: isLeft ? 'none' : 'rotate(180deg)' }}
-                    >
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
+                    {arrowSvg}
                 </motion.div>
             );
-        };
-
-        // 4. ClickSpark Background Component
-        const ClickSpark = ({
-            sparkColor = '#E8D8C4', 
-            sparkSize = 10,
-            sparkRadius = 15,
-            sparkCount = 8,
-            duration = 400,
-            extraScale = 1.0
-        }) => {
-            const canvasRef = useRef(null);
-            const sparksRef = useRef([]);
-
-            useEffect(() => {
-                const canvas = canvasRef.current;
-                const parent = canvas.parentElement;
-                const resizeCanvas = () => {
-                    canvas.width = parent.clientWidth;
-                    canvas.height = parent.clientHeight;
-                };
-                window.addEventListener('resize', resizeCanvas);
-                resizeCanvas();
-                return () => window.removeEventListener('resize', resizeCanvas);
-            }, []);
-
-            const easeFunc = useCallback(t => t * (2 - t), []);
-
-            useEffect(() => {
-                const canvas = canvasRef.current;
-                const ctx = canvas.getContext('2d');
-                let animationId;
-
-                const draw = (timestamp) => {
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    sparksRef.current = sparksRef.current.filter(spark => {
-                        const elapsed = timestamp - spark.startTime;
-                        if (elapsed >= duration) return false;
-
-                        const progress = elapsed / duration;
-                        const eased = easeFunc(progress);
-                        const distance = eased * sparkRadius * extraScale;
-                        const lineLength = sparkSize * (1 - eased);
-
-                        const x1 = spark.x + distance * Math.cos(spark.angle);
-                        const y1 = spark.y + distance * Math.sin(spark.angle);
-                        const x2 = spark.x + (distance + lineLength) * Math.cos(spark.angle);
-                        const y2 = spark.y + (distance + lineLength) * Math.sin(spark.angle);
-
-                        ctx.strokeStyle = sparkColor;
-                        ctx.lineWidth = 2;
-                        ctx.beginPath();
-                        ctx.moveTo(x1, y1);
-                        ctx.lineTo(x2, y2);
-                        ctx.stroke();
-                        return true;
-                    });
-                    animationId = requestAnimationFrame(draw);
-                };
-                animationId = requestAnimationFrame(draw);
-                return () => cancelAnimationFrame(animationId);
-            }, [sparkColor, sparkSize, sparkRadius, duration, extraScale, easeFunc]);
-
-            const handleClick = (e) => {
-                const rect = canvasRef.current.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const now = performance.now();
-                const newSparks = Array.from({ length: sparkCount }, (_, i) => ({
-                    x, y, angle: (2 * Math.PI * i) / sparkCount, startTime: now
-                }));
-                sparksRef.current.push(...newSparks);
-            };
-
-            return (
-                <div onClick={handleClick} style={{ width: '100%', height: '100%', cursor: 'pointer' }}>
-                    <canvas ref={canvasRef} style={{ width: '100%', height: '100%', pointerEvents: 'none' }} />
-                </div>
-            );
-        };
-
-        // =========================================================
-        // 5. DOM MOUNTING EXECUTIONS AT THE VERY BOTTOM
-        // =========================================================
-        const sparkContainer = document.getElementById('hero-spark-container');
-        if (sparkContainer) {
-            ReactDOM.createRoot(sparkContainer).render(<ClickSpark />);
         }
+        return <div style={style}>{arrowSvg}</div>;
+    };
 
-        const keyboardContainer = document.getElementById('skills-keyboard-root');
-        if (keyboardContainer) {
-            ReactDOM.createRoot(keyboardContainer).render(<Keyboard />);
-        }
+    // Safe Initialization and Target Mounting
+const container = document.getElementById('skills-keyboard-root');
+if (container) {
+    ReactDOM.createRoot(container).render(<SkillsKeyboard />);
+} else {
+    console.error("Error: '#skills-keyboard-root' container was not found in the HTML DOM.");
+}
 
-        const leftArrowEl = document.getElementById('arrow-left-root');
-        if (leftArrowEl) {
-            ReactDOM.createRoot(leftArrowEl).render(<ActionArrow isLeft={true} />);
-        }
+const leftRoot = document.getElementById('arrow-left-root');
+const rightRoot = document.getElementById('arrow-right-root');
+if (leftRoot) ReactDOM.createRoot(leftRoot).render(<Arrow direction="left" />);
+if (rightRoot) ReactDOM.createRoot(rightRoot).render(<Arrow direction="right" />);
+</script>
 
-        const rightArrowEl = document.getElementById('arrow-right-root');
-        if (rightArrowEl) {
-            ReactDOM.createRoot(rightArrowEl).render(<ActionArrow isLeft={false} />);
-        }
-    </script>
-
+    
+ 
     <script>
         const observerOptions = { threshold: 0.2 };
         const observer = new IntersectionObserver((entries) => {
@@ -717,116 +638,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
     }
 });
 </script>
-<script type="text/babel">
-    const motion = window.Motion ? window.Motion.motion : null;
 
-    // Added 'bgColor' to the component props
-    const Key = ({ skill, img, bgColor }) => (
-        <motion.div 
-            className="skill-key"
-            style={{ backgroundColor: bgColor || '#1a1a1a' }} // Uses the color from data, or defaults to dark grey
-            whileHover={{ y: -5, scale: 1.05, filter: "brightness(1.2)" }}
-            whileTap={{ scale: 0.95 }}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-        >
-            <img src={img} alt={skill} className="key-logo" />
-        </motion.div>
-    );
-
-    const SkillsKeyboard = () => {
-        if (!window.Motion) return null;
-
-        const rows = [
-            [
-                {s:'AE', img: 'logo/After Effects Logo.png', bgColor: '#00005b'}, // Deep Blue
-                {s:'PR', img: 'logo/Canva.png', bgColor: '#00c4cc'},             // Canva Teal
-                {s:'PS', img: 'logo/Figma.png', bgColor: '#333333'},            // Figma Grey
-                {s:'AI', img: 'logo/adobe illustrator.png', bgColor: '#330000'}, // Dark Maroon
-                {s:'T', img: 'logo/CapCut.png', bgColor: '#ffffff'}              // Black
-            ],
-            [
-                {s:'JS', img: 'logo/javascript.png', bgColor: '#f7df1e'},       // JS Yellow
-                {s:'D', img: 'logo/html.png', bgColor: '#e34f26'},              // HTML Orange
-                {s:'F', img: 'logo/css.png', bgColor: '#1572b6'},               // CSS Blue
-                {s:'FCP', img: 'logo/finalcutprologo.png', bgColor: '#111111'}    // Final Cut Pro Dark Theme
-            ]
-        ];
-
-        return (
-            <div className="keyboard-container">
-                {rows.map((row, i) => (
-                    <div key={i} className="keyboard-row">
-                        {row.map((key, index) => (
-                            <Key 
-                                key={index} 
-                                skill={key.s} 
-                                img={key.img} 
-                                bgColor={key.bgColor} 
-                            />
-                        ))}
-                    </div>
-                ))}
-            </div>
-        );
-    };
-
-    const container = document.getElementById('skills-keyboard-root');
-    if (container) {
-        const root = ReactDOM.createRoot(container);
-        root.render(<SkillsKeyboard />);
-    }
-
-    const Arrow = ({ direction }) => {
-    const isLeft = direction === 'left';
-    return (
-        <motion.div 
-            style={{
-                display: 'inline-block',
-                color: '#E8D8C4',
-                margin: isLeft ? '0 10px 0 0' : '0 0 0 10px',
-                verticalAlign: 'middle'
-            }}
-            // Left arrow moves right, Right arrow moves left
-            animate={{ 
-                x: isLeft ? [0, 8, 0] : [0, -8, 0], 
-            }}
-            transition={{ 
-                duration: 1.5, 
-                repeat: Infinity, 
-                ease: "easeInOut" 
-            }}
-        >
-            <svg 
-                width="30" 
-                height="24" 
-                viewBox="0 0 24 24" 
-                fill="none" 
-                stroke="currentColor" 
-                strokeWidth="2.5" 
-                strokeLinecap="round" 
-                strokeLinejoin="round"
-                // Left arrow is not rotated (default points right), 
-                // Right arrow is rotated 180deg (points left)
-                style={{ transform: isLeft ? 'none' : 'rotate(180deg)' }}
-            >
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
-        </motion.div>
-    );
-};
-
-// Render both arrows into their respective roots
-const leftRoot = document.getElementById('arrow-left-root');
-const rightRoot = document.getElementById('arrow-right-root');
-
-if (leftRoot) ReactDOM.createRoot(leftRoot).render(<Arrow direction="left" />);
-if (rightRoot) ReactDOM.createRoot(rightRoot).render(<Arrow direction="right" />);
-
-
-</script>
 </body>
 
 

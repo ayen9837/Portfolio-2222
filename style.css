@@ -395,8 +395,8 @@ body {
 
 /* Container for the whole keyboard */
 :root {
-    --key-size: clamp(45px, 8vw, 85px); /* Automatically scales based on screen size */
-    --key-gap: clamp(6px, 1.5vw, 12px);
+    --key-size: 70px; /* This sets the height & width of each key cap */
+    --key-gap: 10px;  /* This controls the mechanical spacing between keys */
 }
 #skills-keyboard-root {
     flex: 1;
@@ -411,20 +411,22 @@ body {
     flex-direction: column;
     gap: var(--key-gap);
     width: fit-content;
+    margin: 30px auto; /* Centers the whole keyboard frame horizontally */
 }
 
 .keyboard-row {
     display: flex;
     gap: var(--key-gap);
 }
-.keyboard-row:nth-child(2) { padding-left: 35px; }
+.keyboard-row:nth-child(2) { 
+    padding-left: 35px; 
+}
 .keyboard-row:nth-child(3) { padding-left: calc(var(--key-size) * 0.8); }
 /* --- THE MECHANICAL KEY DESIGN --- */
 /* --- THE BOX DESIGN --- */
 .skill-key {
     width: var(--key-size);
     height: var(--key-size);
-    /* Remove the fixed background color here */
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
     display: flex;
@@ -436,7 +438,6 @@ body {
     box-shadow: 0 6px 0 #000;
     transition: transform 0.1s ease, filter 0.1s ease;
 }
-
 /* Key labels */
 .key-label {
     position: absolute;
@@ -448,13 +449,28 @@ body {
     z-index: 2;
     pointer-events: none;
 }
+
+/* Logo handling inside the keyframe box */
 .key-logo {
-    width: 100%;
-    height: 100%;
-    object-fit: contain; /* Ensures logo fits perfectly inside the box */
+    width: 65%;
+    height: 65%;
+    object-fit: contain; /* Prevents logos from stretching awkwardly */
     display: block;
+    z-index: 1;
+    margin-top: 8px; /* Slightly moves logo down to separate it from the top label */
+}
+/* Ensure the key labels inside the new React layout position themselves perfectly */
+.skill-key {
+    position: relative; /* Confirms layout context for absolute labels */
 }
 
+/* Ensure logos don't overwhelm the container if padding limits are small */
+.key-logo {
+    max-width: 60%;
+    max-height: 60%;
+    object-fit: contain;
+    z-index: 1;
+}
 /* Skill names inside keys */
 .key-skill {
     font-family: 'Bebas Neue', sans-serif;
@@ -472,6 +488,8 @@ body {
     transform: translateY(4px);
     box-shadow: 0 2px 0 #000;
 }
+
+
 /* --- MOBILE RESPONSIVE BREAKPOINTS --- */
 
 /* For Tablets/Small Laptops */
