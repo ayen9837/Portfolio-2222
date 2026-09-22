@@ -412,8 +412,8 @@ body {
     gap: var(--key-gap);
     width: fit-content;
     margin: 30px auto; /* Centers the whole keyboard frame horizontally */
+    transform: scale(1.25);
 }
-
 .keyboard-row {
     display: flex;
     gap: var(--key-gap);
@@ -452,25 +452,21 @@ body {
 
 /* Logo handling inside the keyframe box */
 .key-logo {
-    width: 65%;
-    height: 65%;
-    object-fit: contain; /* Prevents logos from stretching awkwardly */
+    width: 90%;          /* Increased from 80% */
+    height: 90%;         /* Increased from 80% */
+    max-width: 85%;      /* Increased from 60% to allow scaling up */
+    max-height: 85%;     /* Increased from 60% to allow scaling up */
+    object-fit: contain;
     display: block;
     z-index: 1;
-    margin-top: 8px; /* Slightly moves logo down to separate it from the top label */
+    margin: 0 auto;
+    transition: transform 0.3s ease-in-out;
 }
 /* Ensure the key labels inside the new React layout position themselves perfectly */
 .skill-key {
     position: relative; /* Confirms layout context for absolute labels */
 }
 
-/* Ensure logos don't overwhelm the container if padding limits are small */
-.key-logo {
-    max-width: 60%;
-    max-height: 60%;
-    object-fit: contain;
-    z-index: 1;
-}
 /* Skill names inside keys */
 .key-skill {
     font-family: 'Bebas Neue', sans-serif;

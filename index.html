@@ -380,7 +380,7 @@
     const { useState, useEffect, useRef, useCallback } = React;
     const motion = window.FramerMotion ? window.FramerMotion.motion : null;
 
-   <!-- Replace your existing Key component inside the <script type="text/babel"> block -->
+   
 const Key = ({ skill, img, bgColor }) => {
     const [imgError, setImgError] = React.useState(false);
     
@@ -407,7 +407,6 @@ const Key = ({ skill, img, bgColor }) => {
                     textAlign: 'center'
                   }}>{skill}</div>
             }
-            <div className="key-label">{skill}</div>
         </div>
     );
 };
