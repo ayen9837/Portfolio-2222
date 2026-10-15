@@ -442,8 +442,8 @@ const Key = ({ skill, img, bgColor }) => {
                                 className="skill-key" 
                                 style={{ backgroundColor: item.bgColor }}
                             >
+                                <span className="key-label">{item.s}</span>
                                 <img src={item.img} alt={item.s} className="key-logo" />
-                                <span className="key-skill">{item.s}</span>
                             </div>
                         ))}
                     </div>

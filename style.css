@@ -393,18 +393,17 @@ body {
     }
 }
 
-/* Container for the whole keyboard */
 :root {
-    --key-size: 70px; /* Sets height & width of each key cap */
-    --key-gap: 10px;  /* Controls mechanical spacing between keys */
+    --key-size: 75px; /* Width and height of each keycap */
+    --key-gap: 12px;  /* Spacing between keys */
 }
 
 #skills-keyboard-root {
-    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
+    padding: 40px 0;
 }
 
 /* --- THE STAGGERED KEYBOARD --- */
@@ -413,8 +412,7 @@ body {
     flex-direction: column;
     gap: var(--key-gap);
     width: fit-content;
-    margin: 30px auto;
-    transform: scale(1.25);
+    margin: 0 auto;
 }
 
 .keyboard-row {
@@ -423,59 +421,59 @@ body {
 }
 
 .keyboard-row:nth-child(2) { 
-    padding-left: 35px; 
+    padding-left: 40px; /* Staggers the second row like a real keyboard */
 }
 
 /* --- THE MECHANICAL KEY DESIGN --- */
 .skill-key {
     width: var(--key-size);
     height: var(--key-size);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 14px;
     display: flex;
-    flex-direction: column; /* Stacks logo and text nicely */
     justify-content: center;
     align-items: center;
-    padding: 8px;
-    cursor: pointer;
     position: relative;
-    box-shadow: 0 6px 0 #000;
-    transition: transform 0.1s ease, filter 0.1s ease;
+    cursor: pointer;
+    box-shadow: 0 6px 0 rgba(0, 0, 0, 0.6);
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
-/* Logo handling inside the keyframe box */
+/* Top-left keycap legend */
+.key-label {
+    position: absolute;
+    top: 6px;
+    left: 8px;
+    font-size: 9px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.85);
+    z-index: 2;
+    pointer-events: none;
+    max-width: 85%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Centered logo inside the keycap */
 .key-logo {
-    width: 60%;
-    height: 60%;
-    max-width: 60%;
-    max-height: 60%;
+    width: 42px;
+    height: 42px;
     object-fit: contain;
-    display: block;
     z-index: 1;
-    margin: 0 auto;
-    transition: transform 0.3s ease-in-out;
+    display: block;
 }
 
-/* Skill names inside keys */
-.key-skill {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 10px;
-    color: #E8D8C4;
-    text-align: center;
-    line-height: 1;
-    margin-top: 4px;
-}
-
-/* Animation for when the 'Box' is pressed */
+/* Press animations */
 .skill-key:hover {
     transform: translateY(-2px);
+    box-shadow: 0 8px 0 rgba(0, 0, 0, 0.6);
 }
 
 .skill-key:active {
     transform: translateY(4px);
-    box-shadow: 0 2px 0 #000;
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.6);
 }
-
 
 /* --- MOBILE RESPONSIVE BREAKPOINTS --- */
 
