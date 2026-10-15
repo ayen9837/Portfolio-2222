@@ -428,28 +428,29 @@ const Key = ({ skill, img, bgColor }) => {
                 {s:'HTML', img: 'logo/html.png', bgColor: '#e34f26'},              
                 {s:'CSS', img: 'logo/css.png', bgColor: '#1572b6'},               
                 {s:'Final Cut Pro', img: 'logo/finalcutprologo.png', bgColor: '#111111'}
-                {s:'Excel', img: 'logo/Excel.png', bgColor: '#107c41'}     
+          
             ]
         ];
 
         return (
-            <div className="keyboard-container">
-                {rows.map((row, i) => (
-                    <div key={i} className="keyboard-row">
-                        {row.map((key, index) => (
-                            <Key 
-                                key={index} 
-                                skill={key.s} 
-                                img={key.img} 
-                                bgColor={key.bgColor} 
-                            />
-                        ))}
-                    </div>
-                ))}
-            </div>
-        );
-    };
-
+        <div className="keyboard-wrapper">
+            {rows.map((row, rowIndex) => (
+                <div key={rowIndex} className="keyboard-row">
+                    {row.map((item, itemIndex) => (
+                        <div 
+                            key={itemIndex} 
+                            className="skill-key" 
+                            style={{ backgroundColor: item.bgColor }}
+                        >
+                            <img src={item.img} alt={item.s} className="key-logo" />
+                            <span>{item.s}</span>
+                        </div>
+                    ))}
+                </div>
+            ))}
+        </div>
+    );
+};
     const Arrow = ({ direction }) => {
         const isLeft = direction === 'left';
         const style = {
