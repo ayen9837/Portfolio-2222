@@ -395,9 +395,10 @@ body {
 
 /* Container for the whole keyboard */
 :root {
-    --key-size: 70px; /* This sets the height & width of each key cap */
-    --key-gap: 10px;  /* This controls the mechanical spacing between keys */
+    --key-size: 70px; /* Sets height & width of each key cap */
+    --key-gap: 10px;  /* Controls mechanical spacing between keys */
 }
+
 #skills-keyboard-root {
     flex: 1;
     display: flex;
@@ -405,81 +406,71 @@ body {
     align-items: center;
     width: 100%;
 }
+
 /* --- THE STAGGERED KEYBOARD --- */
 .keyboard-container {
     display: flex;
     flex-direction: column;
     gap: var(--key-gap);
     width: fit-content;
-    margin: 30px auto; /* Centers the whole keyboard frame horizontally */
+    margin: 30px auto;
     transform: scale(1.25);
 }
+
 .keyboard-row {
     display: flex;
     gap: var(--key-gap);
 }
+
 .keyboard-row:nth-child(2) { 
     padding-left: 35px; 
 }
-.keyboard-row:nth-child(3) { padding-left: calc(var(--key-size) * 0.8); }
+
 /* --- THE MECHANICAL KEY DESIGN --- */
-/* --- THE BOX DESIGN --- */
 .skill-key {
     width: var(--key-size);
     height: var(--key-size);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
     display: flex;
+    flex-direction: column; /* Stacks logo and text nicely */
     justify-content: center;
     align-items: center;
-    padding: 12px;
+    padding: 8px;
     cursor: pointer;
     position: relative;
     box-shadow: 0 6px 0 #000;
     transition: transform 0.1s ease, filter 0.1s ease;
 }
-/* Key labels */
-.key-label {
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    font-family: 'Akira Expanded', sans-serif;
-    font-size: clamp(8px, 1vw, 11px);
-    color: #E8D8C4;
-    z-index: 2;
-    pointer-events: none;
-}
 
 /* Logo handling inside the keyframe box */
 .key-logo {
-    width: 90%;          /* Increased from 80% */
-    height: 90%;         /* Increased from 80% */
-    max-width: 85%;      /* Increased from 60% to allow scaling up */
-    max-height: 85%;     /* Increased from 60% to allow scaling up */
+    width: 60%;
+    height: 60%;
+    max-width: 60%;
+    max-height: 60%;
     object-fit: contain;
     display: block;
     z-index: 1;
     margin: 0 auto;
     transition: transform 0.3s ease-in-out;
 }
-/* Ensure the key labels inside the new React layout position themselves perfectly */
-.skill-key {
-    position: relative; /* Confirms layout context for absolute labels */
-}
 
 /* Skill names inside keys */
 .key-skill {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 18px;
+    font-size: 10px;
     color: #E8D8C4;
-    text-align: right;
+    text-align: center;
     line-height: 1;
+    margin-top: 4px;
 }
+
 /* Animation for when the 'Box' is pressed */
 .skill-key:hover {
     transform: translateY(-2px);
-    background: #222;
 }
+
 .skill-key:active {
     transform: translateY(4px);
     box-shadow: 0 2px 0 #000;

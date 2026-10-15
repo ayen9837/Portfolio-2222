@@ -415,39 +415,40 @@ const Key = ({ skill, img, bgColor }) => {
 };
 
     const SkillsKeyboard = () => {
-        const rows = [
-            [
-                {s:'After Effects', img: 'logo/After Effects Logo.png', bgColor: '#00005b'}, 
-                {s:'Canva', img: 'logo/Canva.png', bgColor: '#00c4cc'},             
-                {s:'Figma', img: 'logo/Figma.png', bgColor: '#333333'},            
-                {s:'Adobe Illustrator', img: 'logo/adobe illustrator.png', bgColor: '#330000'}, 
-                {s:'Capcut', img: 'logo/CapCut.png', bgColor: '#ffffff'}              
-            ],
-            [
-                {s:'JavaScript', img: 'logo/javascript.png', bgColor: '#f7df1e'},       
-                {s:'HTML', img: 'logo/html.png', bgColor: '#e34f26'},              
-                {s:'CSS', img: 'logo/css.png', bgColor: '#1572b6'},               
-                {s:'Final Cut Pro', img: 'logo/finalcutprologo.png', bgColor: '#111111'}
-          
-            ]
-        ];
+    const rows = [
+        [
+            { s: 'After Effects', img: 'logo/After Effects Logo.png', bgColor: '#00005b' }, 
+            { s: 'Canva', img: 'logo/Canva.png', bgColor: '#00c4cc' },             
+            { s: 'Figma', img: 'logo/Figma.png', bgColor: '#333333' },            
+            { s: 'Adobe Illustrator', img: 'logo/adobe illustrator.png', bgColor: '#330000' }, 
+            { s: 'Capcut', img: 'logo/CapCut.png', bgColor: '#ffffff' }              
+        ],
+        [
+            { s: 'JavaScript', img: 'logo/javascript.png', bgColor: '#f7df1e' },       
+            { s: 'HTML', img: 'logo/html.png', bgColor: '#e34f26' },              
+            { s: 'CSS', img: 'logo/css.png', bgColor: '#1572b6' },               
+            { s: 'Final Cut Pro', img: 'logo/finalcutprologo.png', bgColor: '#111111' }
+        ]
+    ];
 
-        return (
-        <div className="keyboard-wrapper">
-            {rows.map((row, rowIndex) => (
-                <div key={rowIndex} className="keyboard-row">
-                    {row.map((item, itemIndex) => (
-                        <div 
-                            key={itemIndex} 
-                            className="skill-key" 
-                            style={{ backgroundColor: item.bgColor }}
-                        >
-                            <img src={item.img} alt={item.s} className="key-logo" />
-                            <span>{item.s}</span>
-                        </div>
-                    ))}
-                </div>
-            ))}
+    return (
+        <div id="skills-keyboard-root">
+            <div className="keyboard-container">
+                {rows.map((row, rowIndex) => (
+                    <div key={rowIndex} className="keyboard-row">
+                        {row.map((item, itemIndex) => (
+                            <div 
+                                key={itemIndex} 
+                                className="skill-key" 
+                                style={{ backgroundColor: item.bgColor }}
+                            >
+                                <img src={item.img} alt={item.s} className="key-logo" />
+                                <span className="key-skill">{item.s}</span>
+                            </div>
+                        ))}
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };
